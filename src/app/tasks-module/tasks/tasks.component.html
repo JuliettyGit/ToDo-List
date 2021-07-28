@@ -1,16 +1,25 @@
 <div class="inputForm">
+  <h1>Tasks Tracker</h1>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Tasks</mat-label>
-    <input id="tasksInput" matInput>
+    <input [(ngModel)]="taskInput" matInput>
   </mat-form-field>
-  <div class="example-button-row">
     <button id="addBtn" mat-flat-button color="primary" (click)="addTask()" >Add Task</button>
-  </div>
   <div>
     <mat-selection-list [multiple]="false">
-      <mat-list-option *ngFor="let task of taskItem" [value]="task">
-        <option>{{task}}</option>
+      <mat-list-option id="option" *ngFor="let task of taskItems" [value]="task">
+        {{task}}
       </mat-list-option>
+<!--      <div class="detail-options">-->
+<!--        <mat-icon-->
+<!--          class="habit-icon"-->
+<!--          color="primary">-->
+<!--          edit</mat-icon>-->
+<!--        <mat-icon class="habit-icon" color="warn">-->
+<!--          remove_circle-->
+<!--        </mat-icon-->
+<!--        >-->
+<!--      </div>-->
     </mat-selection-list>
   </div>
 </div>

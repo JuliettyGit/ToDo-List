@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-tasks',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.css'],
 })
 export class TasksComponent implements OnInit {
-  taskItem: string[] = [];
-  userInput = document.getElementById('tasksInput');
-  addBtn = document.getElementById('addBtn');
+  taskItems: string[] = [];
+  taskInput: string = '';
+  option: any;
 
   constructor() {
     this.addTask();
@@ -19,7 +19,15 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(){
+    let task = this.taskInput;
 
+    if(!this.taskItems.includes(task)){
+      this.taskItems.push(task);
+      this.option = ''
+    }
+    else alert("This task has already created");
+    console.log(this.taskItems);
   }
+
 
 }

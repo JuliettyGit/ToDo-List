@@ -5,6 +5,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from "@angular/forms";
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatIconModule
   ]
 })
 export class TasksModuleModule { }
