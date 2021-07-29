@@ -10,12 +10,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.component';
 import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
+import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dialog.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
     EditModalDialogComponent,
-    DeleteModalDialogComponent
+    DeleteModalDialogComponent,
+    AlertModalDialogComponent,
   ],
   exports: [
     TasksComponent,
@@ -28,7 +30,8 @@ import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-d
     MatButtonModule,
     FormsModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class TasksModuleModule { }

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-// import {TasksComponent} from '../tasks/tasks.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogData } from '../tasks/interface';
+
+
 
 @Component({
   selector: 'app-modal-dialog',
@@ -7,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-modal-dialog.component.css']
 })
 export class EditModalDialogComponent implements OnInit {
-  changingTask: string = "";
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<EditModalDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData)
+  { }
 
   ngOnInit(): void {
   }
 
-  save(){
-
+  close(): void {
+    this.dialogRef.close();
   }
 }

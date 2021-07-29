@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditModalDialogComponent } from './edit-modal-dialog.component';
+import { AlertModalDialogComponent } from './alert-modal-dialog.component';
 
-describe('ModalDialogComponent', () => {
-  let component: EditModalDialogComponent;
-  let fixture: ComponentFixture<EditModalDialogComponent>;
+describe('AlertModalDialogComponent', () => {
+  let component: AlertModalDialogComponent;
+  let fixture: ComponentFixture<AlertModalDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditModalDialogComponent ]
+      declarations: [ AlertModalDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditModalDialogComponent);
+    fixture = TestBed.createComponent(AlertModalDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
