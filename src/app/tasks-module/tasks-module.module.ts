@@ -31,6 +31,7 @@ import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dial
     FormsModule,
     MatIconModule,
     MatDialogModule,
+    FormsModule,
     FormsModule
   ]
 })

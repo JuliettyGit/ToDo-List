@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {DialogData} from "../tasks/interface";
 
 @Component({
   selector: 'app-delete-modal-dialog',
@@ -7,9 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DeleteModalDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<DeleteModalDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 
 }

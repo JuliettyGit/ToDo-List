@@ -39,12 +39,8 @@ export class TasksComponent implements OnInit {
     return this.taskItems;
   }
 
-  editTask(i: number){
-    // let changedTask = prompt('Change your task', this.taskItems[i]);
-    // if (typeof changedTask === "string") {
-    //   this.taskItems.splice(i, 1, changedTask);
-    // }
-    this.taskItems.splice(i, 1, )
+  editTask(i: number, result: string){
+    this.taskItems.splice(i, 1, result)
 
     console.log(this.taskItems)
   }
@@ -60,15 +56,24 @@ export class TasksComponent implements OnInit {
       data: {task: this.taskItems[i]}
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.editTask(i);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== this.taskItems[i] && result)
+      {
+        this.editTask(i, result);
+      }
     });
   }
 
   openDeleteDialog(i: number) {
-   const dialogRef = this.dialog.open(DeleteModalDialogComponent);
-    dialogRef.afterClosed().subscribe(() =>{
-      this.deleteTask(i);
+   const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
+       data: {task: this.taskItems[i]}
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result == undefined)
+      {
+        console.log(result)
+        this.deleteTask(i);
+      }
     })
   }
 

@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../tasks/interface';
 
 
-
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: './edit-modal-dialog.component.html',
