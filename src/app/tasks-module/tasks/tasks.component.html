@@ -7,19 +7,22 @@
     <button id="addBtn" mat-flat-button color="primary" (click)="addTask()" >Add Task</button>
   <div>
     <mat-selection-list [multiple]="false">
-      <mat-list-option id="option" *ngFor="let task of taskItems" [value]="task">
+      <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
         {{task}}
+        <div class="detail-options">
+          <mat-icon id="edit"
+            color="primary"
+          (click)="setEditForm(i)">
+            edit</mat-icon>
+          <mat-icon color="warn"
+          id="delete"
+          (click)="deleteElement(i)">
+            remove_circle
+          </mat-icon>
+
+        </div>
       </mat-list-option>
-<!--      <div class="detail-options">-->
-<!--        <mat-icon-->
-<!--          class="habit-icon"-->
-<!--          color="primary">-->
-<!--          edit</mat-icon>-->
-<!--        <mat-icon class="habit-icon" color="warn">-->
-<!--          remove_circle-->
-<!--        </mat-icon-->
-<!--        >-->
-<!--      </div>-->
+
     </mat-selection-list>
   </div>
 </div>

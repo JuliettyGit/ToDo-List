@@ -8,10 +8,10 @@ import {Component, OnInit} from '@angular/core';
 export class TasksComponent implements OnInit {
   taskItems: string[] = [];
   taskInput: string = '';
-  option: any;
+  task: string = '';
 
   constructor() {
-    this.addTask();
+
   }
 
   ngOnInit(): void {
@@ -19,15 +19,27 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(){
-    let task = this.taskInput;
-
-    if(!this.taskItems.includes(task)){
-      this.taskItems.push(task);
-      this.option = ''
+    if(!this.taskItems.includes(this.taskInput)){
+      this.taskItems.push(this.taskInput);
     }
     else alert("This task has already created");
     console.log(this.taskItems);
+    return this.taskItems;
   }
 
+  setEditForm(i: number){
+    let changedTask = prompt('Change your task', this.taskItems[i]);
+    if (typeof changedTask === "string") {
+      this.taskItems.splice(i, 1, changedTask);
+    }
+
+    console.log(this.taskItems)
+  }
+
+  deleteElement(i: number)
+  {
+      this.taskItems.splice(i, 1);
+      console.log(this.taskItems);
+  }
 
 }
