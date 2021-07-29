@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
+
 
 @Component({
   selector: 'app-tasks',
@@ -8,9 +12,8 @@ import {Component, OnInit} from '@angular/core';
 export class TasksComponent implements OnInit {
   taskItems: string[] = [];
   taskInput: string = '';
-  task: string = '';
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
   }
 
@@ -19,7 +22,11 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(){
-    if(!this.taskItems.includes(this.taskInput)){
+    if(this.taskInput === '')
+    {
+      alert("Can't add blank field");
+    }
+    else if(!this.taskItems.includes(this.taskInput)){
       this.taskItems.push(this.taskInput);
     }
     else alert("This task has already created");
@@ -28,10 +35,12 @@ export class TasksComponent implements OnInit {
   }
 
   setEditForm(i: number){
-    let changedTask = prompt('Change your task', this.taskItems[i]);
-    if (typeof changedTask === "string") {
-      this.taskItems.splice(i, 1, changedTask);
-    }
+    this.openEditDialog()
+
+    // let changedTask = prompt('Change your task', this.taskItems[i]);
+    // if (typeof changedTask === "string") {
+    //   this.taskItems.splice(i, 1, changedTask);
+    // }
 
     console.log(this.taskItems)
   }
@@ -41,5 +50,18 @@ export class TasksComponent implements OnInit {
       this.taskItems.splice(i, 1);
       console.log(this.taskItems);
   }
+
+  openEditDialog() {
+    this.dialog.open(EditModalDialogComponent);
+  }
+
+  openDeleteDialog(i: number) {
+   const dialogRef = this.dialog.open(DeleteModalDialogComponent);
+    dialogRef.afterClosed().subscribe(() =>{
+      this.deleteElement(i);
+    })
+  }
+
+
 
 }

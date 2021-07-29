@@ -8,12 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.component';
+import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
-    ModalDialogComponent
+    EditModalDialogComponent,
+    DeleteModalDialogComponent
   ],
   exports: [
     TasksComponent,

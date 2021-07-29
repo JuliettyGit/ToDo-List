@@ -2,7 +2,7 @@
   <h1>Tasks Tracker</h1>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Tasks</mat-label>
-    <input [(ngModel)]="taskInput" matInput>
+    <input [(ngModel)] ="taskInput" matInput>
   </mat-form-field>
     <button id="addBtn" mat-flat-button color="primary" (click)="addTask()" >Add Task</button>
   <div>
@@ -16,7 +16,7 @@
             edit</mat-icon>
           <mat-icon color="warn"
           id="delete"
-          (click)="deleteElement(i)">
+          (click)="openDeleteDialog(i)">
             remove_circle
           </mat-icon>
 
