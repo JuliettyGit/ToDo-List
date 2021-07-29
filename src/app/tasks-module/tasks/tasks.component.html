@@ -1,0 +1,32 @@
+<div class="inputForm">
+  <h1>Tasks Tracker</h1>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Tasks</mat-label>
+    <input [(ngModel)] ="taskInput" matInput>
+  </mat-form-field>
+    <button id="addBtn" mat-flat-button color="primary" (click)="addTask()" >Add Task</button>
+  <div>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
+        {{task}}
+        <div class="detail-options">
+          <mat-icon id="edit"
+            color="primary"
+          (click)="openEditDialog(i)">
+            edit</mat-icon>
+          <mat-icon color="warn"
+          id="delete"
+          (click)="openDeleteDialog(i)">
+            remove_circle
+          </mat-icon>
+
+        </div>
+      </mat-list-option>
+
+    </mat-selection-list>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Change your task</h1>
+<textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5" [(ngModel)]="data.task"></textarea>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="close()" >Cancel</button>
+  <button mat-button mat-dialog-close [mat-dialog-close]="data.task">Save</button>
+</div>
