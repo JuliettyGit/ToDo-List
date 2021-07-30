@@ -72,14 +72,20 @@ export class TasksComponent implements OnInit {
 
   openDeleteDialog(i: number) {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
-      data: {task: this.taskItems[i]}
+      data: {task: this.taskItems[i].taskText}
     });
     dialogRef.afterClosed().subscribe(result =>{
       if(result == undefined)
       {
         this.deleteTask(i);
       }
-    })
+    });
+
+    dialogRef.backdropClick().subscribe(result => {
+      dialogRef.close({
+        data: {task: this.taskItems[i].taskText}
+      });
+    });
   }
 
   openAlertDialog(alertText: string){
