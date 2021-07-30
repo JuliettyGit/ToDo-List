@@ -9,7 +9,7 @@
   <div>
     <mat-selection-list [multiple]="false">
       <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
-        {{task}}
+        {{taskItems[i].taskText}}
         <div class="detail-options">
           <mat-icon id="edit"
                     color="accent"

@@ -46,12 +46,12 @@ export class TasksComponent implements OnInit {
   }
 
   editTask(i: number, result: string){
-    this.taskItems.splice(i, 1)
+    this.taskItems.splice(i, 1,)
 
     console.log(this.taskItems)
   }
 
-  deleteTask(i: number, result: string)
+  deleteTask(i: number)
   {
     this.taskItems.splice(i, 1);
     console.log(this.taskItems);
@@ -59,7 +59,7 @@ export class TasksComponent implements OnInit {
 
   openEditDialog(i: number) {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
-      data: {task: this.taskItems[i]}
+      data: {task: this.taskItems[i].taskText}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -77,8 +77,7 @@ export class TasksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if(result == undefined)
       {
-        console.log( typeof result)
-        this.deleteTask(i, result);
+        this.deleteTask(i);
       }
     })
   }
