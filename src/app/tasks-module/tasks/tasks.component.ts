@@ -29,15 +29,17 @@ export class TasksComponent implements OnInit {
       taskStatus: 'Unset'
     }
 
-    if(newTask.taskText === '')
+    if(newTask.taskText === '' || newTask.taskText?.match(/^ *$/) !== null)
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
     }
+
     else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
     {
       this.taskItems.push(newTask);
     }
+
     else {
       const alertText = "This task has already created";
       this.openAlertDialog(alertText);

@@ -1,3 +1,3 @@
 export interface DialogData {
-  alertText?: string;
+  alertText: string;
 }
