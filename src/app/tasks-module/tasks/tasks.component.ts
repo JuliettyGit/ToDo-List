@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
+import { TaskInterface } from './taskInterface';
 
 
 @Component({
@@ -12,26 +13,29 @@ import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dia
 })
 
 export class TasksComponent implements OnInit {
-  taskItems: string[] = [];
+  taskItems: Array<TaskInterface> = [];
   taskInput: string = '';
 
-  constructor(public dialog: MatDialog) {
-
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
 
   }
 
   addTask(){
-    if(this.taskInput === '')
+    let newTask: TaskInterface = {
+      taskText: this.taskInput,
+      taskStatus: ''
+    }
+
+    if(newTask.taskText === '')
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
     }
-    else if(!this.taskItems.includes(this.taskInput)){
-      this.taskItems.push(this.taskInput);
-
+    else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
+    {
+      this.taskItems.push(newTask);
     }
     else {
       const alertText = "This task has already created";
@@ -42,15 +46,15 @@ export class TasksComponent implements OnInit {
   }
 
   editTask(i: number, result: string){
-    this.taskItems.splice(i, 1, result)
+    this.taskItems.splice(i, 1)
 
     console.log(this.taskItems)
   }
 
-  deleteTask(i: number)
+  deleteTask(i: number, result: string)
   {
-      this.taskItems.splice(i, 1);
-      console.log(this.taskItems);
+    this.taskItems.splice(i, 1);
+    console.log(this.taskItems);
   }
 
   openEditDialog(i: number) {
@@ -67,14 +71,14 @@ export class TasksComponent implements OnInit {
   }
 
   openDeleteDialog(i: number) {
-   const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
-       data: {task: this.taskItems[i]}
+    const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
+      data: {task: this.taskItems[i]}
     });
     dialogRef.afterClosed().subscribe(result =>{
       if(result == undefined)
       {
-        console.log(result)
-        this.deleteTask(i);
+        console.log( typeof result)
+        this.deleteTask(i, result);
       }
     })
   }

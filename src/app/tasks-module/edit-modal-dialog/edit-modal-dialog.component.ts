@@ -20,4 +20,9 @@ export class EditModalDialogComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
   }
+
+  save(){
+    this.dialogRef.close();
+  }
+
 }
