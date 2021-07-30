@@ -3,7 +3,8 @@ import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
-import { TaskInterface } from './taskInterface';
+import { Task } from './task';
+import { filter } from "rxjs/operators";
 
 
 @Component({
@@ -13,7 +14,7 @@ import { TaskInterface } from './taskInterface';
 })
 
 export class TasksComponent implements OnInit {
-  taskItems: Array<TaskInterface> = [];
+  taskItems: Array<Task> = [];
   taskInput: string = '';
 
   constructor(public dialog: MatDialog) {}
@@ -23,9 +24,9 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(){
-    let newTask: TaskInterface = {
+    let newTask: Task = {
       taskText: this.taskInput,
-      taskStatus: ''
+      taskStatus: 'Unset'
     }
 
     if(newTask.taskText === '')
@@ -45,8 +46,8 @@ export class TasksComponent implements OnInit {
     return this.taskItems;
   }
 
-  editTask(i: number, result: string){
-    this.taskItems.splice(i, 1,)
+  editTask(i: number, result: Task){
+    this.taskItems.splice(i, 1, result)
 
     console.log(this.taskItems)
   }
@@ -62,11 +63,10 @@ export class TasksComponent implements OnInit {
       data: {task: this.taskItems[i].taskText}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result !== this.taskItems[i] && result)
-      {
+    dialogRef.afterClosed()
+      .pipe(filter(res => !!this.taskItems[i] && res))
+      .subscribe(result => {
         this.editTask(i, result);
-      }
     });
   }
 
@@ -74,23 +74,21 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {task: this.taskItems[i].taskText}
     });
-    dialogRef.afterClosed().subscribe(result =>{
-      if(result == undefined)
-      {
-        this.deleteTask(i);
-      }
-    });
 
-    dialogRef.backdropClick().subscribe(result => {
-      dialogRef.close({
-        data: {task: this.taskItems[i].taskText}
+    dialogRef.backdropClick()
+      .subscribe(() => {
+        dialogRef.close();
+        console.log(this.taskItems);
       });
-    });
+
+    dialogRef.afterClosed()
+      .pipe(filter(res => !!res))
+      .subscribe(() => this.deleteTask(i));
   }
 
   openAlertDialog(alertText: string){
     this.dialog.open(AlertModalDialogComponent, {
-      data: {alertText: alertText}
+      data: { alertText: alertText }
     });
   }
 
