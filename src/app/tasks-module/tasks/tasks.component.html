@@ -4,19 +4,20 @@
     <mat-label>Tasks</mat-label>
     <input [(ngModel)] ="taskInput" matInput>
   </mat-form-field>
-    <button id="addBtn" mat-flat-button color="primary" (click)="addTask()" >Add Task</button>
+  <button id="addBtn" mat-flat-button color="accent" (click)="addTask()" >Add Task</button>
+
   <div>
     <mat-selection-list [multiple]="false">
       <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
         {{task}}
         <div class="detail-options">
           <mat-icon id="edit"
-            color="primary"
-          (click)="openEditDialog(i)">
+                    color="accent"
+                    (click)="openEditDialog(i)">
             edit</mat-icon>
           <mat-icon color="warn"
-          id="delete"
-          (click)="openDeleteDialog(i)">
+                    id="delete"
+                    (click)="openDeleteDialog(i)">
             remove_circle
           </mat-icon>
 

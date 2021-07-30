@@ -9,11 +9,8 @@
 
 .example-full-width {
   width: 100%;
-}
-
-.example-button-row {
-  display: table-cell;
-  width: 500px;
+  line-height: 1.5em;
+  height: 5em;
 }
 
 .center{
@@ -21,10 +18,11 @@
   margin-right: auto;
 }
 
-.d-flex{
-  display:inline-block;
+mat-selection-list{
+  margin-top: 2em;
 }
 
-.inline{
-  display: inline-block;
+
+button{
+  float: right;
 }
