@@ -28,8 +28,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css",
-              "tasks/tasks.component.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
