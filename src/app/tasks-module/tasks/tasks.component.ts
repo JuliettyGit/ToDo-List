@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
 
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -30,6 +31,7 @@ export class TasksComponent implements OnInit {
     }
     else if(!this.taskItems.includes(this.taskInput)){
       this.taskItems.push(this.taskInput);
+
     }
     else {
       const alertText = "This task has already created";

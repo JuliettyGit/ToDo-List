@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogData} from "../tasks/interface";
+import {DialogData} from "../tasks/dialogDataInterface";
 
 @Component({
   selector: 'app-delete-modal-dialog',
