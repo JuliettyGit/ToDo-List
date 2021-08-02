@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.component';
 import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dial
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatSelectModule,
     MatButtonModule,
     FormsModule,
     MatIconModule,

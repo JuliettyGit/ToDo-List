@@ -25,11 +25,11 @@ export class TasksComponent implements OnInit {
 
   addTask(){
     let newTask: Task = {
-      taskText: this.taskInput,
-      taskStatus: 'Unset'
+      taskText: this.taskInput.trim(),
+      taskStatus: 'Not set'
     }
 
-    if(newTask.taskText === '' || newTask.taskText?.match(/^ *$/) !== null)
+    if(newTask.taskText === '')
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
@@ -44,7 +44,7 @@ export class TasksComponent implements OnInit {
       const alertText = "This task has already created";
       this.openAlertDialog(alertText);
     }
-    console.log(this.taskItems);
+
     return this.taskItems;
   }
 

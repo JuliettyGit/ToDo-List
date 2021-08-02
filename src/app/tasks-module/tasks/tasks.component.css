@@ -1,16 +1,17 @@
 .inputForm {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 80%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 2em;
 }
 
-.example-full-width {
-  width: 100%;
+.taskNameInput {
+  width: 60%;
   line-height: 1.5em;
-  height: 5em;
+  height: 4.1em;
+  margin-right: 1em;
 }
 
 .center{
@@ -25,4 +26,20 @@ mat-selection-list{
 
 button{
   float: right;
+  min-width: 10em;
+}
+
+.statusSelect{
+  width: 30%;
+  line-height: 1.5em;
+  height: 4.1em;
+  margin-right: 1em;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.d-flex > span{
+  margin-right: auto;
 }
