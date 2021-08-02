@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {Task} from "../tasks/task";
+import { Task } from "../tasks/task";
 
 
 @Component({
@@ -23,7 +23,7 @@ export class EditModalDialogComponent implements OnInit {
 
   save()
   {
-    this.dialogRef.close( {taskText: this.data.task});
+    this.dialogRef.close( {taskText: this.data.taskText, taskStatus: this.data.taskStatus});
   }
 
 }

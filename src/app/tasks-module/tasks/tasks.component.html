@@ -6,14 +6,7 @@
       <input [(ngModel)] ="taskInput" matInput>
     </mat-form-field>
 
-    <mat-form-field class="statusSelect" appearance="fill">
-      <mat-label>Select an option</mat-label>
-      <mat-select disableRipple>
-        <mat-option value="1" color="accent">Not Set</mat-option>
-        <mat-option value="2">In Progress</mat-option>
-        <mat-option value="3">Finished</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-option-list></app-option-list>
 
     <button id="addBtn" mat-flat-button color="accent" (click)="addTask()" >Add Task</button>
   </div>
@@ -22,7 +15,7 @@
     <mat-selection-list [multiple]="false">
       <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
         <div class="d-flex">
-        <span>{{taskItems[i].taskText}}</span><span>{{taskItems[i].taskStatus}}</span>
+        <span>{{taskItems[i].taskText}}</span><span class="status">{{taskItems[i].taskStatus}}</span>
           <div class="detail-options">
             <mat-icon id="edit"
                       color="accent"

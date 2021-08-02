@@ -5,7 +5,7 @@ import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-d
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
 import { Task } from './task';
 import { filter } from "rxjs/operators";
-
+import { OptionListComponent } from 'src/app/option-list/option-list.component'
 
 @Component({
   selector: 'app-tasks',
@@ -17,16 +17,21 @@ export class TasksComponent implements OnInit {
   taskItems: Array<Task> = [];
   taskInput: string = '';
 
-  constructor(public dialog: MatDialog) {}
+  optionList = new OptionListComponent();
+
+  constructor(public dialog: MatDialog)
+{
+
+}
 
   ngOnInit(): void {
 
   }
 
   addTask(){
-    let newTask: Task = {
+    let newTask: { taskText: string;  taskStatus: string} = {
       taskText: this.taskInput.trim(),
-      taskStatus: 'Not set'
+      taskStatus: this.optionList.selectedValue
     }
 
     if(newTask.taskText === '')
@@ -37,7 +42,13 @@ export class TasksComponent implements OnInit {
 
     else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
     {
-      this.taskItems.push(newTask);
+      if(this.optionList.selectedValue === ""){
+        this.optionList.selectedValue = this.optionList.taskStatuses[0].status;
+      }
+      else {
+        this.taskItems.push(<Task>newTask);
+        console.log(this.taskItems)
+      }
     }
 
     else {
@@ -62,7 +73,7 @@ export class TasksComponent implements OnInit {
 
   openEditDialog(i: number) {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
-      data: {task: this.taskItems[i].taskText}
+      data: {taskText: this.taskItems[i].taskText, taskStatus: this.taskItems[i].taskStatus}
     });
 
     dialogRef.afterClosed()
@@ -74,7 +85,7 @@ export class TasksComponent implements OnInit {
 
   openDeleteDialog(i: number) {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
-      data: {task: this.taskItems[i].taskText}
+      data: {taskText: this.taskItems[i].taskText}
     });
 
     dialogRef.backdropClick()
