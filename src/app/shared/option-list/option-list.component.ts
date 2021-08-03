@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { taskStatuses } from '../constants/taskStatuses'
 
 @Component({
   selector: 'app-option-list',
@@ -11,28 +12,8 @@ export class OptionListComponent implements OnInit {
   @Input() status: string = '';
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
-  taskStatuses = [
-    {
-      status: 'Not Set',
-      value: 'Not Set',
-      class: 'notSet'
-    },
-    {
-      status: 'Not Started',
-      value: 'Not Started',
-      class: 'notStarted'
-    },
-    {
-      status: 'In Progress',
-      value: 'In Progress',
-      class: 'inProgress'
-    },
-    {
-      status: 'Finished',
-      value: 'Finished',
-      class: 'finished'
-    }
-  ];
+  taskStatuses = taskStatuses;
+
 
   constructor()
   { }
@@ -42,7 +23,5 @@ export class OptionListComponent implements OnInit {
 
   setStatus(event: string){
     this.change.emit(event);
-    this.status = event;
-    console.log(event)
   }
 }

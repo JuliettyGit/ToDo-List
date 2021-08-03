@@ -1,14 +1,14 @@
 <div class="inputForm center">
   <h1>Tasks Tracker</h1>
-  <div class="d-flex">
+  <div class="d-flex" (keydown.enter)="addTask()">
     <mat-form-field class="taskNameInput" appearance="fill">
       <mat-label>Tasks</mat-label>
-      <input [(ngModel)] ="taskInput" matInput>
+      <input [(ngModel)] ="taskInput" matInput (keydown.enter)="addTask()">
     </mat-form-field>
 
-    <app-option-list  (change)="writeStatus($event)"></app-option-list>
+    <app-option-list (change)="writeStatus($event)"></app-option-list>
 
-    <button id="addBtn" mat-flat-button color="accent" (click)="addTask()" >Add Task</button>
+    <button id="addBtn" mat-flat-button color="accent" (click)="addTask()">Add Task</button>
   </div>
 
   <div>

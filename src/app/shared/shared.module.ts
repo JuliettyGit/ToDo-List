@@ -7,7 +7,6 @@ import { MatListModule } from "@angular/material/list";
 import { FormsModule } from "@angular/forms";
 import { OptionListComponent } from './option-list/option-list.component';
 
-
 @NgModule({
   declarations: [
     OptionListComponent

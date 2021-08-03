@@ -1,6 +1,7 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Task } from "../tasks/task";
+import {AlertModalDialogComponent} from "../alert-modal-dialog/alert-modal-dialog.component";
 
 
 @Component({
@@ -11,12 +12,11 @@ import { Task } from "../tasks/task";
 export class EditModalDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<EditModalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Task)
+              @Inject(MAT_DIALOG_DATA) public data: Task,
+              public dialog: MatDialog)
   { }
 
-  status: string = '';
-
-  @Input() setStatus: void;
+  status: string = this.data.taskStatus;
 
   ngOnInit(): void {
   }
@@ -32,7 +32,20 @@ export class EditModalDialogComponent implements OnInit {
 
   save()
   {
-    this.dialogRef.close( {taskText: this.data.taskText, taskStatus: this.status});
+    if(this.data.taskText !== ''){
+      this.dialogRef.close( {taskText: this.data.taskText, taskStatus: this.status});
+    }
+    else
+    {
+      const alertText = "Unable to add empty task!";
+      this.openAlertDialog(alertText);
+    }
+  }
+
+  openAlertDialog(alertText: string) {
+    this.dialog.open(AlertModalDialogComponent, {
+      data: {alertText: alertText}
+    });
   }
 
 }

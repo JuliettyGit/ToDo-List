@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
 import { Task } from './task';
-import { filter } from "rxjs/operators";
-import {OptionListComponent} from "../../shared/option-list/option-list.component";
+import { filter } from 'rxjs/operators';
+import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 
 @Component({
   selector: 'app-tasks',
@@ -14,11 +14,13 @@ import {OptionListComponent} from "../../shared/option-list/option-list.componen
 })
 
 export class TasksComponent implements OnInit {
+
+  @Input() setStatus: void;
+
   taskItems: Array<Task> = [];
   taskInput: string = '';
   status: string = '';
 
-  @Input() setStatus: void;
 
   constructor(public dialog: MatDialog)
 {
@@ -33,11 +35,10 @@ export class TasksComponent implements OnInit {
     this.status = event;
   }
 
-  addTask(){
-    let olc = new OptionListComponent()
 
+  addTask(){
     if(!this.status){
-      this.status = olc.taskStatuses[0].status;
+      this.status = taskStatuses[0].status
     }
 
     let newTask: { taskText: string;  taskStatus: string} = {
@@ -55,12 +56,14 @@ export class TasksComponent implements OnInit {
     {
       this.taskItems.push(<Task>newTask);
       this.taskInput = '';
+      console.log(this.taskItems)
     }
 
     else {
       const alertText = "This task has already created";
       this.openAlertDialog(alertText);
     }
+    this.status = taskStatuses[0].status
 
     return this.taskItems;
   }
@@ -81,6 +84,7 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
       data: {taskText: this.taskItems[i].taskText, taskStatus: this.taskItems[i].taskStatus}
     });
+    console.log(this.taskItems)
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!this.taskItems[i] && res))
