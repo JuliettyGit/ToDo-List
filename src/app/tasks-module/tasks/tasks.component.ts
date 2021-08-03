@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit } from '@angular/core';
 import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
 import { Task } from './task';
 import { filter } from "rxjs/operators";
+import {OptionListComponent} from "../../shared/option-list/option-list.component";
 
 @Component({
   selector: 'app-tasks',
@@ -15,8 +16,9 @@ import { filter } from "rxjs/operators";
 export class TasksComponent implements OnInit {
   taskItems: Array<Task> = [];
   taskInput: string = '';
+  status: string = '';
 
-  @Output() setStatus = new EventEmitter<string>();
+  @Input() setStatus: void;
 
   constructor(public dialog: MatDialog)
 {
@@ -26,10 +28,21 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  writeStatus(event: string)
+  {
+    this.status = event;
+  }
+
   addTask(){
+    let olc = new OptionListComponent()
+
+    if(!this.status){
+      this.status = olc.taskStatuses[0].status;
+    }
+
     let newTask: { taskText: string;  taskStatus: string} = {
       taskText: this.taskInput.trim(),
-      taskStatus: '',
+      taskStatus: this.status,
     }
 
     if(newTask.taskText === '')
@@ -40,9 +53,8 @@ export class TasksComponent implements OnInit {
 
     else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
     {
-
-        this.taskItems.push(<Task>newTask);
-        console.log(this.taskItems)
+      this.taskItems.push(<Task>newTask);
+      this.taskInput = '';
     }
 
     else {

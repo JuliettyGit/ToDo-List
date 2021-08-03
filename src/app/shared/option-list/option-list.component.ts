@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 export class OptionListComponent implements OnInit {
 
-  @Input() thisStatus: string = '';
+  @Input() status: string = '';
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
   taskStatuses = [
@@ -41,7 +41,8 @@ export class OptionListComponent implements OnInit {
   }
 
   setStatus(event: string){
-    this.thisStatus = event;
+    this.change.emit(event);
+    this.status = event;
     console.log(event)
   }
 }

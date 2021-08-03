@@ -12,8 +12,7 @@ import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.c
 import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
-import { OptionListComponent } from '../option-list/option-list.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { OptionListComponent } from '../option-list/option-list.component';
     EditModalDialogComponent,
     DeleteModalDialogComponent,
     AlertModalDialogComponent,
-    OptionListComponent
   ],
   exports: [
     TasksComponent,
@@ -37,7 +35,7 @@ import { OptionListComponent } from '../option-list/option-list.component';
     MatIconModule,
     MatDialogModule,
     FormsModule,
-    FormsModule,
+    SharedModule
   ]
 })
 export class TasksModuleModule { }

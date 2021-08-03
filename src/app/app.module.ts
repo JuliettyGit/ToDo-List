@@ -7,6 +7,7 @@ import { MatInputModule } from "@angular/material/input";
 import { TasksModuleModule } from "./tasks-module/tasks-module.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,

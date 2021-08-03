@@ -1,4 +1,4 @@
-<div class="inputForm">
+<div class="inputForm center">
   <h1>Tasks Tracker</h1>
   <div class="d-flex">
     <mat-form-field class="taskNameInput" appearance="fill">
@@ -6,7 +6,7 @@
       <input [(ngModel)] ="taskInput" matInput>
     </mat-form-field>
 
-    <app-option-list></app-option-list>
+    <app-option-list  (change)="writeStatus($event)"></app-option-list>
 
     <button id="addBtn" mat-flat-button color="accent" (click)="addTask()" >Add Task</button>
   </div>
@@ -15,7 +15,14 @@
     <mat-selection-list [multiple]="false">
       <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
         <div class="d-flex">
-        <span>{{taskItems[i].taskText}}</span><span class="status">{{taskItems[i].taskStatus}}</span>
+        <div class="taskText">
+          {{taskItems[i].taskText}}
+        </div>
+
+          <div class="status">
+            {{taskItems[i].taskStatus}}
+          </div>
+
           <div class="detail-options">
             <mat-icon id="edit"
                       color="accent"

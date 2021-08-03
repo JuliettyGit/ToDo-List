@@ -6,7 +6,8 @@
 
 </textarea>
 
-<app-option-list></app-option-list>
+<app-option-list  (change)="writeStatus($event)"></app-option-list>
+
 
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close()" >Cancel</button>
