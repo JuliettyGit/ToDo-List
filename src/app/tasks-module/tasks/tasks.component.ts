@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
 import { Task } from './task';
 import { filter } from "rxjs/operators";
-import { OptionListComponent } from 'src/app/option-list/option-list.component'
 
 @Component({
   selector: 'app-tasks',
@@ -17,7 +16,7 @@ export class TasksComponent implements OnInit {
   taskItems: Array<Task> = [];
   taskInput: string = '';
 
-  optionList = new OptionListComponent();
+  @Output() setStatus = new EventEmitter<string>();
 
   constructor(public dialog: MatDialog)
 {
@@ -25,13 +24,12 @@ export class TasksComponent implements OnInit {
 }
 
   ngOnInit(): void {
-
   }
 
   addTask(){
     let newTask: { taskText: string;  taskStatus: string} = {
       taskText: this.taskInput.trim(),
-      taskStatus: this.optionList.selectedValue
+      taskStatus: '',
     }
 
     if(newTask.taskText === '')
@@ -42,13 +40,9 @@ export class TasksComponent implements OnInit {
 
     else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
     {
-      if(this.optionList.selectedValue === ""){
-        this.optionList.selectedValue = this.optionList.taskStatuses[0].status;
-      }
-      else {
+
         this.taskItems.push(<Task>newTask);
         console.log(this.taskItems)
-      }
     }
 
     else {

@@ -1,0 +1,10 @@
+<mat-form-field class="statusSelect" appearance="fill">
+  <mat-label>Select status</mat-label>
+  <mat-select [ngModel]="thisStatus" (ngModelChange)="setStatus($event)" name="status">
+    <mat-option *ngFor="let status of taskStatuses; let i = index;"
+                [value]="taskStatuses[i].value"
+                [class]="taskStatuses[i].class">
+      {{taskStatuses[i].status}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
