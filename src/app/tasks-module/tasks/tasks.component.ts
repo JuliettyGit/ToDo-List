@@ -6,6 +6,7 @@ import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dia
 import { Task } from './task';
 import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-tasks',
@@ -20,8 +21,10 @@ export class TasksComponent implements OnInit {
   taskItems: Array<Task> = [];
   taskInput: string = '';
   status: string = '';
-  sClass: string = '';
-
+  toDoList: Array<Task> = [];
+  notStartedTasks: Array<Task> = [];
+  inProgressTasks: Array<Task> = [];
+  finishedTasks: Array<Task> = [];
 
   constructor(public dialog: MatDialog)
 {
@@ -34,20 +37,20 @@ export class TasksComponent implements OnInit {
   writeStatus(event: string)
   {
     this.status = event;
-    this.sClass = event;
   }
 
 
   addTask(){
-    if(!this.status){
+    if(!this.status)
+    {
       this.status = taskStatuses[0].status
     }
 
-    let newTask: { taskText: string;  taskStatus: string; statusClass: string} = {
+    let newTask: { taskText: string;  taskStatus: string } =
+      {
       taskText: this.taskInput.trim(),
       taskStatus: this.status,
-      statusClass: this.sClass
-    }
+      }
 
     if(newTask.taskText === '')
     {
@@ -57,9 +60,39 @@ export class TasksComponent implements OnInit {
 
     else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
     {
-      this.taskItems.push(<Task>newTask);
+      switch (newTask.taskStatus){
+        case taskStatuses[0].status:
+        {
+          this.toDoList.push(<Task>newTask);
+          break;
+        }
+
+        case taskStatuses[1].status:
+        {
+          this.notStartedTasks.push(<Task>newTask);
+          break;
+        }
+
+        case taskStatuses[2].status:
+        {
+          this.inProgressTasks.push(<Task>newTask);
+          break;
+        }
+
+        case taskStatuses[3].status:
+        {
+          this.finishedTasks.push(<Task>newTask);
+          break;
+        }
+
+        default:
+        {
+          this.taskItems.push(<Task>newTask);
+          break
+        }
+      }
+
       this.taskInput = '';
-      console.log(this.taskItems)
     }
 
     else {
@@ -69,6 +102,21 @@ export class TasksComponent implements OnInit {
     this.status = taskStatuses[0].status
 
     return this.taskItems;
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container)
+    {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }
+
+    else
+    {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 
   editTask(i: number, result: Task){

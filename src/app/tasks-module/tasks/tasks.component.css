@@ -1,7 +1,11 @@
 .inputForm {
   min-width: 150px;
-  max-width: 80%;
-  margin-top: 2em;
+  max-width: 90%;
+  margin-top: 1em;
+}
+
+.inputForm > h1{
+  margin-bottom: 1em;
 }
 
 .taskNameInput {
@@ -14,6 +18,7 @@
 .center{
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 mat-selection-list{
@@ -27,13 +32,94 @@ button{
   letter-spacing: 0.1em;
 }
 
+.task-container{
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-top: 1.5em;
+  width: 100%;
+  margin-right: 1em;
+}
+
+.task-container:last-child{
+  margin-right: 0;
+}
+
+.task-container > h2{
+  margin-bottom: 0;
+  color: #f8f9fa;
+}
+
+.toDoContainer{
+  background: rgba(253, 44, 65, 0.7);
+}
+
+.notStartedContainer{
+  background: rgba(167, 185, 189, 0.7);
+}
+
+.inProgressContainer{
+  background: rgba(13, 110, 253, 0.7);
+}
+
+.finishedContainer{
+  background: rgba(33, 179, 64, 0.7);
+}
+
+.task-list {
+  border: solid 1px #ccc;
+  min-height: 50px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.example-box {
+  padding: 15px 5px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.task-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
 .d-flex{
   display: flex;
 }
 
 .taskText{
   font-weight: 400;
-  width: 50%;
+  width: 40em;
 }
 
 .detail-options > mat-icon {
@@ -50,16 +136,4 @@ button{
   color: #012307;
 }
 
-.notSet{
-  background: rgba(253, 44, 65, 0.7);
-  color: #f8f9fa;
-}
-
-.notSet:hover {
-  background: #fd2c41;
-}
-
-.notStarted {
-  background: rgba(167, 185, 189, 0.7);
-}
 

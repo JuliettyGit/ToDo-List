@@ -1,9 +1,9 @@
 <div class="inputForm center">
-  <h1>Tasks Tracker</h1>
+  <h1 class="center">Tasks Tracker</h1>
   <div class="d-flex" (keydown.enter)="addTask()">
     <mat-form-field class="taskNameInput" appearance="fill">
       <mat-label>Tasks</mat-label>
-      <input [(ngModel)] ="taskInput" matInput (keydown.enter)="addTask()">
+      <input autocomplete="off" [(ngModel)] ="taskInput" matInput (keydown.enter)="addTask()">
     </mat-form-field>
 
     <app-option-list (change)="writeStatus($event)"></app-option-list>
@@ -11,7 +11,81 @@
     <button id="addBtn" mat-flat-button color="accent" (click)="addTask()">Add Task</button>
   </div>
 
-  <div>
+  <div class="d-flex" cdkDropListGroup>
+  <div class="task-container toDoContainer">
+    <h2>To do</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="toDoList"
+      (cdkDropListDropped)="drop($event)">
+
+      <div class="example-box"
+           *ngFor="let task of toDoList let i = index;"
+           cdkDrag>
+        {{toDoList[i].taskText}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="task-container notStartedContainer">
+    <h2>Not Started</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="notStartedTasks"
+      (cdkDropListDropped)="drop($event)">
+
+      <div class="example-box"
+           *ngFor="let task of notStartedTasks let i = index;"
+           cdkDrag>
+        {{notStartedTasks[i].taskText}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="task-container inProgressContainer">
+    <h2>In Progress</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="inProgressTasks"
+      (cdkDropListDropped)="drop($event)">
+
+      <div class="example-box"
+           *ngFor="let task of inProgressTasks let i = index;"
+           cdkDrag>
+        {{inProgressTasks[i].taskText}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="task-container finishedContainer">
+    <h2>Finished</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="finishedTasks"
+      (cdkDropListDropped)="drop($event)">
+
+      <div class="example-box"
+           *ngFor="let task of finishedTasks let i = index;"
+           cdkDrag>
+        {{finishedTasks[i].taskText}}
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+    <div>
     <mat-selection-list [multiple]="false">
       <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
         <div class="d-flex">
@@ -19,7 +93,7 @@
           {{taskItems[i].taskText}}
         </div>
 
-          <div class="status" [class]="taskItems[i].taskStatus">
+          <div class="status">
             {{taskItems[i].taskStatus}}
           </div>
 

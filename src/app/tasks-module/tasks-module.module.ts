@@ -12,6 +12,7 @@ import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.c
 import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
 import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     MatDialogModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    DragDropModule
   ]
 })
 export class TasksModuleModule { }

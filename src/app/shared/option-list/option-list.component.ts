@@ -9,7 +9,7 @@ import { taskStatuses } from '../constants/taskStatuses'
 
 export class OptionListComponent implements OnInit {
 
-  @Input() status: string = ''; sClass: string = '';
+  @Input() status: string = '';
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
   taskStatuses = taskStatuses;
@@ -23,6 +23,5 @@ export class OptionListComponent implements OnInit {
 
   setStatus(event: string){
     this.change.emit(event);
-    console.log(event)
   }
 }
