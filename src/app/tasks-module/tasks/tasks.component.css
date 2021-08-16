@@ -50,3 +50,16 @@ button{
   color: #012307;
 }
 
+.notSet{
+  background: rgba(253, 44, 65, 0.7);
+  color: #f8f9fa;
+}
+
+.notSet:hover {
+  background: #fd2c41;
+}
+
+.notStarted {
+  background: rgba(167, 185, 189, 0.7);
+}
+

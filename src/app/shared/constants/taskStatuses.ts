@@ -2,21 +2,21 @@ export const taskStatuses = [
   {
     status: 'Not Set',
     value: 'Not Set',
-    class: 'notSet'
+    sClass: 'notSet'
   },
   {
     status: 'Not Started',
     value: 'Not Started',
-    class: 'notStarted'
+    sClass: 'notStarted'
   },
   {
     status: 'In Progress',
     value: 'In Progress',
-    class: 'inProgress'
+    sClass: 'inProgress'
   },
   {
     status: 'Finished',
     value: 'Finished',
-    class: 'finished'
+    sClass: 'finished'
   }
 ];

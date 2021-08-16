@@ -3,7 +3,7 @@
   <mat-select [ngModel]="status" (ngModelChange)="setStatus($event)">
     <mat-option *ngFor="let status of taskStatuses; let i = index;"
                 [value]="taskStatuses[i].value"
-                [class]="taskStatuses[i].class">
+                [class]="taskStatuses[i].sClass">
       {{taskStatuses[i].status}}
     </mat-option>
   </mat-select>

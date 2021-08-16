@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
   taskItems: Array<Task> = [];
   taskInput: string = '';
   status: string = '';
+  sClass: string = '';
 
 
   constructor(public dialog: MatDialog)
@@ -33,6 +34,7 @@ export class TasksComponent implements OnInit {
   writeStatus(event: string)
   {
     this.status = event;
+    this.sClass = event;
   }
 
 
@@ -41,9 +43,10 @@ export class TasksComponent implements OnInit {
       this.status = taskStatuses[0].status
     }
 
-    let newTask: { taskText: string;  taskStatus: string} = {
+    let newTask: { taskText: string;  taskStatus: string; statusClass: string} = {
       taskText: this.taskInput.trim(),
       taskStatus: this.status,
+      statusClass: this.sClass
     }
 
     if(newTask.taskText === '')
@@ -71,20 +74,18 @@ export class TasksComponent implements OnInit {
   editTask(i: number, result: Task){
     this.taskItems.splice(i, 1, result)
 
-    console.log(this.taskItems)
   }
 
   deleteTask(i: number)
   {
     this.taskItems.splice(i, 1);
-    console.log(this.taskItems);
   }
 
   openEditDialog(i: number) {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
-      data: {taskText: this.taskItems[i].taskText, taskStatus: this.taskItems[i].taskStatus}
+      data: {taskText: this.taskItems[i].taskText,
+        taskStatus: this.taskItems[i].taskStatus}
     });
-    console.log(this.taskItems)
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!this.taskItems[i] && res))
@@ -101,7 +102,6 @@ export class TasksComponent implements OnInit {
     dialogRef.backdropClick()
       .subscribe(() => {
         dialogRef.close();
-        console.log(this.taskItems);
       });
 
     dialogRef.afterClosed()
