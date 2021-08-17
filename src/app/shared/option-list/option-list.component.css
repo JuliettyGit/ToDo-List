@@ -13,21 +13,13 @@ mat-option{
   color: #f8f9fa;
 }
 
-.notSet{
+.toDo{
   background: rgba(253, 44, 65, 0.7);
   color: #f8f9fa;
 }
 
-.notSet:hover {
+.toDo:hover {
   background: #fd2c41;
-}
-
-.notStarted {
-  background: rgba(167, 185, 189, 0.7);
-}
-
-.notStarted:hover {
-  background: #a7b9bd;
 }
 
 .inProgress {

@@ -76,7 +76,8 @@ button{
 }
 
 .example-box {
-  padding: 15px 5px;
+  line-height: 1.5em;
+  padding: 10px 5px;
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
@@ -90,6 +91,7 @@ button{
 }
 
 .cdk-drag-preview {
+  line-height: 1.5em;
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
@@ -124,6 +126,10 @@ button{
 
 .detail-options > mat-icon {
   margin-right: 0.2em;
+}
+
+.detail-options{
+  cursor: pointer;
 }
 
 .status{

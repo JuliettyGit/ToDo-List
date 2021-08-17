@@ -1,11 +1,7 @@
 export const taskStatuses = [
   {
-    status: 'Not Set',
-    sClass: 'notSet'
-  },
-  {
-    status: 'Not Started',
-    sClass: 'notStarted'
+    status: 'To Do',
+    sClass: 'toDo'
   },
   {
     status: 'In Progress',
