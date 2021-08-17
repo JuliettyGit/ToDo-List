@@ -1,12 +1,12 @@
-import {Component, Input, OnInit } from '@angular/core';
-import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
-import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
-import { Task } from './task';
-import { filter } from 'rxjs/operators';
-import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import {Component, Input, OnInit} from '@angular/core';
+import {EditModalDialogComponent} from '../edit-modal-dialog/edit-modal-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
+import {AlertModalDialogComponent} from '../alert-modal-dialog/alert-modal-dialog.component';
+import {Task} from './task';
+import {filter} from 'rxjs/operators';
+import {taskStatuses} from 'src/app/shared/constants/taskStatuses'
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-tasks',
@@ -63,9 +63,28 @@ export class TasksComponent implements OnInit {
       const alertText = "This task has already created";
       this.openAlertDialog(alertText);
     }
+
     this.status = taskStatuses[0].status
 
     return this.taskItems;
+  }
+
+  tasksObj = {
+    toDos: this.toDoTasks,
+    inProg: this.inProgressTasks,
+    finished: this.finishedTasks
+  }
+
+  get toDoTasks(){
+    return this.taskItems.filter(task => task.taskStatus == taskStatuses[0].status);
+  }
+
+  get inProgressTasks(){
+    return this.taskItems.filter(task => task.taskStatus == taskStatuses[1].status);
+  }
+
+  get finishedTasks(){
+    return this.taskItems.filter(task => task.taskStatus == taskStatuses[2].status);
   }
 
   editTask(i: number, result: Task){

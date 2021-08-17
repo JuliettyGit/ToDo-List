@@ -80,10 +80,7 @@ button{
   padding: 10px 5px;
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  text-align: left;
   box-sizing: border-box;
   cursor: move;
   background: white;
@@ -128,8 +125,9 @@ button{
   margin-right: 0.2em;
 }
 
-.detail-options{
+app-edit-button, app-delete-button{
   cursor: pointer;
+  float: right;
 }
 
 .status{

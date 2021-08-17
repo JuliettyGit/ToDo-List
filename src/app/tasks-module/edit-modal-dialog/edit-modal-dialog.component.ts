@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Task } from "../tasks/task";
-import {AlertModalDialogComponent} from "../alert-modal-dialog/alert-modal-dialog.component";
+import { AlertModalDialogComponent } from "../alert-modal-dialog/alert-modal-dialog.component";
 
 
 @Component({

@@ -22,25 +22,15 @@
     <div
       class="task-list"
       cdkDropList
-      [cdkDropListData]="taskItems"
+      [cdkDropListData]="tasksObj.toDos"
       (cdkDropListDropped)="drop($event)">
 
       <div class="example-box"
-           *ngFor="let task of taskItems let i = index;"
-           cdkDrag>
-        {{taskItems[i].taskText}}
+           *ngFor="let task of toDoTasks let i = index;" cdkDrag>
+        {{toDoTasks[i].taskText}}
 
-        <div class="detail-options">
-          <mat-icon id="edit"
-                    color="accent"
-                    (click)="openEditDialog(i)">
-            edit</mat-icon>
-          <mat-icon color="warn"
-                    id="delete"
-                    (click)="openDeleteDialog(i)">
-            remove_circle
-          </mat-icon>
-        </div>
+        <app-delete-button (click)="openDeleteDialog(taskItems.indexOf(toDoTasks[i]))"></app-delete-button>
+        <app-edit-button (click)="openEditDialog(taskItems.indexOf(toDoTasks[i]))"></app-edit-button>
       </div>
     </div>
   </div>
@@ -51,24 +41,15 @@
     <div
       class="task-list"
       cdkDropList
-      [cdkDropListData]="taskItems"
+      [cdkDropListData]="tasksObj.inProg"
       (cdkDropListDropped)="drop($event)">
 
       <div class="example-box"
-           *ngFor="let task of taskItems let i = index;" cdkDrag>
-        {{taskItems[i].taskText}}
+           *ngFor="let task of inProgressTasks let i = index;" cdkDrag>
+        {{inProgressTasks[i].taskText}}
 
-        <div class="detail-options">
-          <mat-icon id="edit"
-                    color="accent"
-                    (click)="openEditDialog(i)">
-            edit</mat-icon>
-          <mat-icon color="warn"
-                    id="delete"
-                    (click)="openDeleteDialog(i)">
-            remove_circle
-          </mat-icon>
-        </div>
+        <app-delete-button (click)="openDeleteDialog(taskItems.indexOf(inProgressTasks[i]))"></app-delete-button>
+        <app-edit-button (click)="openEditDialog(taskItems.indexOf(inProgressTasks[i]))"></app-edit-button>
       </div>
     </div>
   </div>
@@ -79,24 +60,15 @@
     <div
       class="task-list"
       cdkDropList
-      [cdkDropListData]="taskItems"
+      [cdkDropListData]="tasksObj.finished"
       (cdkDropListDropped)="drop($event)">
 
       <div class="example-box"
-           *ngFor="let task of taskItems let i = index;"
-           cdkDrag>
-        {{taskItems[i].taskText}}
-        <div class="detail-options">
-        <mat-icon id="edit"
-                  color="accent"
-                  (click)="openEditDialog(i)">
-          edit</mat-icon>
-        <mat-icon color="warn"
-                  id="delete"
-                  (click)="openDeleteDialog(i)">
-          remove_circle
-        </mat-icon>
-      </div>
+           *ngFor="let task of finishedTasks let i = index;" cdkDrag>
+        {{finishedTasks[i].taskText}}
+
+        <app-delete-button (click)="openDeleteDialog(taskItems.indexOf(finishedTasks[i]))"></app-delete-button>
+        <app-edit-button (click)="openEditDialog(taskItems.indexOf(finishedTasks[i]))"></app-edit-button>
       </div>
     </div>
   </div>

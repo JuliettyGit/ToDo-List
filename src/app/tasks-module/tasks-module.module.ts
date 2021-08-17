@@ -14,6 +14,8 @@ import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dial
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from '../shared/shared.module';
+import { EditButtonComponent } from './edit-button/edit-button.component';
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SharedModule } from '../shared/shared.module';
     EditModalDialogComponent,
     DeleteModalDialogComponent,
     AlertModalDialogComponent,
+    EditButtonComponent,
+    DeleteButtonComponent,
   ],
   exports: [
     TasksComponent,
