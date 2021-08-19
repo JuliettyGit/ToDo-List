@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {EditModalDialogComponent} from '../edit-modal-dialog/edit-modal-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {DeleteModalDialogComponent} from '../delete-modal-dialog/delete-modal-dialog.component';
-import {AlertModalDialogComponent} from '../alert-modal-dialog/alert-modal-dialog.component';
-import {Task} from './task';
-import {filter} from 'rxjs/operators';
-import {taskStatuses} from 'src/app/shared/constants/taskStatuses'
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import { Component, Input, OnInit } from '@angular/core';
+import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteModalDialogComponent } from '../delete-modal-dialog/delete-modal-dialog.component';
+import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
+import { Task } from './task';
+import { filter } from 'rxjs/operators';
+import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-tasks',
@@ -18,24 +18,27 @@ export class TasksComponent implements OnInit {
 
   @Input() setStatus: void;
 
-  taskItems: Array<Task> = [];
+  // taskItems: Array<Task> = [];
   taskInput: string = '';
   status: string = '';
 
-  constructor(public dialog: MatDialog)
-{
-
-}
-
-  ngOnInit(): void {
+  tasksObj = {
+    toDos: new Array<Task>(),
+    inProgress: new Array<Task>(),
+    finished: new Array<Task>(),
   }
+
+  constructor(public dialog: MatDialog) {}
+
+  ngOnInit(): void {}
 
   writeStatus(event: string)
   {
     this.status = event;
   }
 
-  addTask(){
+  addTask()
+  {
     if(!this.status)
     {
       this.status = taskStatuses[0].status
@@ -53,66 +56,119 @@ export class TasksComponent implements OnInit {
       this.openAlertDialog(alertText);
     }
 
-    else if(!this.taskItems.find((item)=> newTask.taskText === item.taskText))
+    else
     {
-      this.taskItems.push(<Task>newTask);
+      if((this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+        ||(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+        ||(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
+      {
+        const alertText = "This task has already created";
+        this.openAlertDialog(alertText);
+      }
+
+      if(newTask.taskStatus === taskStatuses[0].status
+        && !(this.tasksObj.toDos.some(e => e.taskText === newTask.taskText))
+        && !(this.tasksObj.inProgress.some(e => e.taskText === newTask.taskText))
+        && !(this.tasksObj.finished.some(e => e.taskText === newTask.taskText)))
+      {
+        this.tasksObj.toDos.push(newTask);
+        console.log(this.tasksObj.toDos)
+      }
+
+      if(newTask.taskStatus === taskStatuses[1].status
+        && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+        && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+        && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText))
+      )
+      {
+        this.tasksObj.inProgress.push(newTask);
+        console.log(this.tasksObj.inProgress)
+      }
+      if(newTask.taskStatus === taskStatuses[2].status
+        && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+        && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+        && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
+      {
+        this.tasksObj.finished.push(newTask);
+        console.log(this.tasksObj.finished)
+      }
+
       this.taskInput = '';
     }
 
-    else {
-      const alertText = "This task has already created";
-      this.openAlertDialog(alertText);
-    }
-
-    this.status = taskStatuses[0].status
-
-    return this.taskItems;
+    return this.tasksObj;
   }
 
-  tasksObj = {
-    toDos: this.toDoTasks,
-    inProg: this.inProgressTasks,
-    finished: this.finishedTasks
-  }
-
-  get toDoTasks(){
-    return this.taskItems.filter(task => task.taskStatus == taskStatuses[0].status);
-  }
-
-  get inProgressTasks(){
-    return this.taskItems.filter(task => task.taskStatus == taskStatuses[1].status);
-  }
-
-  get finishedTasks(){
-    return this.taskItems.filter(task => task.taskStatus == taskStatuses[2].status);
-  }
-
-  editTask(i: number, result: Task){
-    this.taskItems.splice(i, 1, result)
-
-  }
-
-  deleteTask(i: number)
+  editTask(task: any, result: Task)
   {
-    this.taskItems.splice(i, 1);
+    if(this.tasksObj.toDos.includes(task))
+    {
+      this.tasksObj.toDos.splice(task, 1, result)
+    }
+    if(this.tasksObj.inProgress.includes(task))
+    {
+      this.tasksObj.inProgress.splice(task, 1, result);
+    }
+    if(this.tasksObj.finished.includes(task))
+    {
+      this.tasksObj.finished.splice(task, 1, result);
+    }
   }
 
-  openEditDialog(i: number) {
+  deleteTask(i: any)
+  {
+    if(this.tasksObj.toDos.includes(i))
+    {
+      this.tasksObj.toDos.splice(i, 1);
+    }
+    if(this.tasksObj.inProgress.includes(i))
+    {
+      this.tasksObj.inProgress.splice(i, 1);
+    }
+    if(this.tasksObj.finished.includes(i))
+    {
+      this.tasksObj.finished.splice(i, 1);
+    }
+  }
+
+  whatsTask(i: any)
+  {
+    let task: Task;
+    if(this.tasksObj.toDos.includes(i))
+    {
+      task = i;
+      this.openEditDialog(task)
+    }
+    if(this.tasksObj.inProgress.includes(i))
+    {
+      task = i;
+      this.openEditDialog(task)
+    }
+    if(this.tasksObj.finished.includes(i))
+    {
+      task = i;
+      this.openEditDialog(task)
+    }
+  }
+
+  openEditDialog(task: Task)
+  {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
-      data: {taskText: this.taskItems[i].taskText,
-        taskStatus: this.taskItems[i].taskStatus}
+      data: {taskText: task.taskText,
+        taskStatus: task.taskStatus}
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(res => !!this.taskItems[i] && res))
+      .pipe(filter(res => !!task && res))
       .subscribe(result => {
-        this.editTask(i, result);
+        this.editTask(task, result);
     });
   }
 
-  openDeleteDialog(i: number) {
+  openDeleteDialog(element: Task)
+  {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
-      data: {taskText: this.taskItems[i].taskText}
+      data: {taskText: element.taskText}
     });
 
     dialogRef.backdropClick()
@@ -122,16 +178,18 @@ export class TasksComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!res))
-      .subscribe(() => this.deleteTask(i));
+      .subscribe(() => this.deleteTask(element));
   }
 
-  openAlertDialog(alertText: string){
+  openAlertDialog(alertText: string)
+  {
     this.dialog.open(AlertModalDialogComponent, {
       data: { alertText: alertText }
     });
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  drop(event: CdkDragDrop<Task[]>)
+  {
     if (event.previousContainer === event.container)
     {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

@@ -3,30 +3,29 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { Task } from "../tasks/task";
 import { AlertModalDialogComponent } from "../alert-modal-dialog/alert-modal-dialog.component";
 
-
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: './edit-modal-dialog.component.html',
   styleUrls: ['./edit-modal-dialog.component.css']
 })
-export class EditModalDialogComponent implements OnInit {
+export class EditModalDialogComponent implements OnInit
+{
 
   constructor(public dialogRef: MatDialogRef<EditModalDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Task,
-              public dialog: MatDialog)
-  { }
+              public dialog: MatDialog) {}
 
   status: string = this.data.taskStatus;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   writeStatus(event: string)
   {
     this.status = event;
   }
 
-  close(): void {
+  close(): void
+  {
     this.dialogRef.close();
   }
 
@@ -34,6 +33,7 @@ export class EditModalDialogComponent implements OnInit {
   {
     if(this.data.taskText !== ''){
       this.dialogRef.close( {taskText: this.data.taskText, taskStatus: this.status});
+      console.log(this.status)
     }
     else
     {
@@ -42,7 +42,8 @@ export class EditModalDialogComponent implements OnInit {
     }
   }
 
-  openAlertDialog(alertText: string) {
+  openAlertDialog(alertText: string)
+  {
     this.dialog.open(AlertModalDialogComponent, {
       data: {alertText: alertText}
     });
