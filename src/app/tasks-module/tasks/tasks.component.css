@@ -6,6 +6,7 @@
 
 .inputForm > h1{
   margin-bottom: 1em;
+  color: var(--header);
 }
 
 .taskNameInput {
@@ -51,19 +52,18 @@ button{
 }
 
 .toDoContainer{
-  background: rgba(253, 44, 65, 0.7);
-}
-
-.notStartedContainer{
-  background: rgba(167, 185, 189, 0.7);
+  /*background: rgba(253, 44, 65, 0.7);*/
+  background-color: var(--red);
 }
 
 .inProgressContainer{
-  background: rgba(13, 110, 253, 0.7);
+  /*background: rgba(13, 110, 253, 0.7);*/
+  background-color: var(--blue);
 }
 
 .finishedContainer{
-  background: rgba(33, 179, 64, 0.7);
+  /*background: rgba(33, 179, 64, 0.7);*/
+  background-color: var(--green);
 }
 
 .task-list {
@@ -126,4 +126,8 @@ app-edit-button, app-delete-button{
   float: right;
 }
 
+.btnPrimary{
+  background-color: var(--yelow);
+  color: white;
+}
 

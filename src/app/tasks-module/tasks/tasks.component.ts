@@ -18,7 +18,6 @@ export class TasksComponent implements OnInit {
 
   @Input() setStatus: void;
 
-  // taskItems: Array<Task> = [];
   taskInput: string = '';
   status: string = '';
 
@@ -99,38 +98,6 @@ export class TasksComponent implements OnInit {
     return this.tasksObj;
   }
 
-  editTask(task: any, result: Task)
-  {
-    if(this.tasksObj.toDos.includes(task))
-    {
-      this.tasksObj.toDos.splice(task, 1, result)
-    }
-    if(this.tasksObj.inProgress.includes(task))
-    {
-      this.tasksObj.inProgress.splice(task, 1, result);
-    }
-    if(this.tasksObj.finished.includes(task))
-    {
-      this.tasksObj.finished.splice(task, 1, result);
-    }
-  }
-
-  deleteTask(i: any)
-  {
-    if(this.tasksObj.toDos.includes(i))
-    {
-      this.tasksObj.toDos.splice(i, 1);
-    }
-    if(this.tasksObj.inProgress.includes(i))
-    {
-      this.tasksObj.inProgress.splice(i, 1);
-    }
-    if(this.tasksObj.finished.includes(i))
-    {
-      this.tasksObj.finished.splice(i, 1);
-    }
-  }
-
   whatsTask(i: any)
   {
     let task: Task;
@@ -151,6 +118,52 @@ export class TasksComponent implements OnInit {
     }
   }
 
+  editTask(task: any, result: Task)
+  {
+    if(this.tasksObj.toDos.includes(task))
+    {
+      if(task.taskStatus == taskStatuses[1].status) {
+        let index = this.tasksObj.toDos.indexOf(task);
+        let newStatus = this.tasksObj.toDos[index];
+        this.tasksObj.toDos.splice(task, 1)
+        this.tasksObj.inProgress.push(newStatus);
+      }
+    else
+      {
+        this.tasksObj.toDos.splice(task, 1, result);
+      }
+      console.log(this.tasksObj)
+    }
+    if(this.tasksObj.inProgress.includes(task))
+    {
+      this.tasksObj.inProgress.splice(task, 1, result);
+    }
+    if(this.tasksObj.finished.includes(task))
+    {
+      this.tasksObj.finished.splice(task, 1, result);
+    }
+  }
+
+  deleteTask(arr: Array<Task>, i: any)
+  {
+    // if(this.tasksObj.toDos.includes(i))
+    // {
+    //   this.tasksObj.toDos.splice(i, 1);
+    // }
+    // if(this.tasksObj.inProgress.includes(i))
+    // {
+    //   this.tasksObj.inProgress.splice(i, 1);
+    // }
+    // if(this.tasksObj.finished.includes(i))
+    // {
+    //   this.tasksObj.finished.splice(i, 1);
+    // }
+    console.log(arr.indexOf(i));
+    let index = arr.indexOf(i);
+    arr.splice(index, 1);
+    console.log(this.tasksObj)
+  }
+
   openEditDialog(task: Task)
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
@@ -165,7 +178,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(element: Task)
+  openDeleteDialog(arr: Array<Task>, element: Task)
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {taskText: element.taskText}
@@ -178,7 +191,7 @@ export class TasksComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!res))
-      .subscribe(() => this.deleteTask(element));
+      .subscribe(() => this.deleteTask(arr, element));
   }
 
   openAlertDialog(alertText: string)

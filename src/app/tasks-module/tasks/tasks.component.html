@@ -12,7 +12,9 @@
                        (keyup.enter)="addTask()">
       </app-option-list>
 
-      <button id="addBtn" mat-flat-button color="accent" (click)="addTask()">Add Task</button>
+      <button id="addBtn" mat-flat-button
+              class="btnPrimary"
+              (click)="addTask()">Add Task</button>
     </div>
 
     <div class="d-flex" cdkDropListGroup>
@@ -29,7 +31,7 @@
                *ngFor="let task of tasksObj.toDos let i = index;" cdkDrag>
             {{tasksObj.toDos[i].taskText}}
 
-            <app-delete-button (click)="openDeleteDialog(tasksObj.toDos[i])"></app-delete-button>
+            <app-delete-button (click)="openDeleteDialog(tasksObj.toDos ,tasksObj.toDos[i])"></app-delete-button>
             <app-edit-button (click)="whatsTask(tasksObj.toDos[i])"></app-edit-button>
           </div>
         </div>
@@ -48,7 +50,7 @@
              *ngFor="let task of tasksObj.inProgress let i = index;" cdkDrag>
           {{tasksObj.inProgress[i].taskText}}
 
-          <app-delete-button (click)="openDeleteDialog(tasksObj.inProgress[i])"></app-delete-button>
+          <app-delete-button (click)="openDeleteDialog(tasksObj.inProgress,tasksObj.inProgress[i])"></app-delete-button>
           <app-edit-button (click)="whatsTask(tasksObj.inProgress[i])"></app-edit-button>
         </div>
       </div>
@@ -67,7 +69,7 @@
                  *ngFor="let task of tasksObj.finished let i = index;" cdkDrag>
               {{tasksObj.finished[i].taskText}}
 
-              <app-delete-button (click)="openDeleteDialog(tasksObj.finished[i])"></app-delete-button>
+              <app-delete-button (click)="openDeleteDialog(tasksObj.finished ,tasksObj.finished[i])"></app-delete-button>
               <app-edit-button (click)="whatsTask(tasksObj.finished[i])"></app-edit-button>
             </div>
         </div>
