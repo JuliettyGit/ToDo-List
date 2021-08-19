@@ -36,18 +36,47 @@ export class TasksComponent implements OnInit {
     this.status = event;
   }
 
-  addTask()
+  addTask(newTask: Task)
   {
-    if(!this.status)
+    if(newTask.taskStatus === taskStatuses[0].status
+      && !(this.tasksObj.toDos.some(e => e.taskText === newTask.taskText))
+      && !(this.tasksObj.inProgress.some(e => e.taskText === newTask.taskText))
+      && !(this.tasksObj.finished.some(e => e.taskText === newTask.taskText)))
     {
-      this.status = taskStatuses[0].status
+      this.tasksObj.toDos.push(newTask);
     }
 
-    let newTask: { taskText: string;  taskStatus: string } =
+    if(newTask.taskStatus === taskStatuses[1].status
+      && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+      && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+      && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText))
+    )
+    {
+      this.tasksObj.inProgress.push(newTask);
+    }
+    if(newTask.taskStatus === taskStatuses[2].status
+      && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+      && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+      && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
+    {
+      this.tasksObj.finished.push(newTask);
+    }
+
+    this.taskInput = '';
+    return this.tasksObj;
+  }
+
+  checkUserInput(){
+    if(!this.status)
+    {
+      this.status = taskStatuses[0].status;
+    }
+
+    let newTask: Task  =
       {
-      taskText: this.taskInput.trim(),
-      taskStatus: this.status,
-      }
+        taskText: this.taskInput.trim(),
+        taskStatus: this.status,
+      };
 
     if(newTask.taskText === '')
     {
@@ -55,133 +84,76 @@ export class TasksComponent implements OnInit {
       this.openAlertDialog(alertText);
     }
 
+    if((this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
+       ||(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
+       ||(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
+    {
+      const alertText = "This task has already created";
+      this.openAlertDialog(alertText);
+    }
     else
     {
-      if((this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-        ||(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-        ||(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
-      {
-        const alertText = "This task has already created";
-        this.openAlertDialog(alertText);
-      }
-
-      if(newTask.taskStatus === taskStatuses[0].status
-        && !(this.tasksObj.toDos.some(e => e.taskText === newTask.taskText))
-        && !(this.tasksObj.inProgress.some(e => e.taskText === newTask.taskText))
-        && !(this.tasksObj.finished.some(e => e.taskText === newTask.taskText)))
-      {
-        this.tasksObj.toDos.push(newTask);
-        console.log(this.tasksObj.toDos)
-      }
-
-      if(newTask.taskStatus === taskStatuses[1].status
-        && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-        && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-        && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText))
-      )
-      {
-        this.tasksObj.inProgress.push(newTask);
-        console.log(this.tasksObj.inProgress)
-      }
-      if(newTask.taskStatus === taskStatuses[2].status
-        && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-        && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-        && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
-      {
-        this.tasksObj.finished.push(newTask);
-        console.log(this.tasksObj.finished)
-      }
-
-      this.taskInput = '';
+    this.addTask(newTask);
     }
 
-    return this.tasksObj;
+    let qwe = Array.from(Object.values(this.tasksObj))
+    console.log(typeof qwe);
+    console.log(typeof Object.entries(this.tasksObj))
   }
 
-  whatsTask(i: any)
+  editTask(arr: Array<Task>,task: any, result: Task)
   {
-    let task: Task;
-    if(this.tasksObj.toDos.includes(i))
+    let index = arr.indexOf(task);
+    arr.splice(index, 1, result);
+    task.taskStatus = result.taskStatus;
+
+    if(task.taskStatus == taskStatuses[0].status)
     {
-      task = i;
-      this.openEditDialog(task)
+      arr.splice(task, 1);
+      this.tasksObj.toDos.push(task);
     }
-    if(this.tasksObj.inProgress.includes(i))
+
+    if(task.taskStatus == taskStatuses[1].status)
     {
-      task = i;
-      this.openEditDialog(task)
+      arr.splice(task, 1);
+      this.tasksObj.inProgress.push(task);
     }
-    if(this.tasksObj.finished.includes(i))
+
+    if(task.taskStatus == taskStatuses[2].status)
     {
-      task = i;
-      this.openEditDialog(task)
+      arr.splice(task, 1);
+      this.tasksObj.finished.push(task);
     }
   }
 
-  editTask(task: any, result: Task)
+  deleteTask(arr: Array<Task>, i: Task)
   {
-    if(this.tasksObj.toDos.includes(task))
-    {
-      if(task.taskStatus == taskStatuses[1].status) {
-        let index = this.tasksObj.toDos.indexOf(task);
-        let newStatus = this.tasksObj.toDos[index];
-        this.tasksObj.toDos.splice(task, 1)
-        this.tasksObj.inProgress.push(newStatus);
-      }
-    else
-      {
-        this.tasksObj.toDos.splice(task, 1, result);
-      }
-      console.log(this.tasksObj)
-    }
-    if(this.tasksObj.inProgress.includes(task))
-    {
-      this.tasksObj.inProgress.splice(task, 1, result);
-    }
-    if(this.tasksObj.finished.includes(task))
-    {
-      this.tasksObj.finished.splice(task, 1, result);
-    }
-  }
-
-  deleteTask(arr: Array<Task>, i: any)
-  {
-    // if(this.tasksObj.toDos.includes(i))
-    // {
-    //   this.tasksObj.toDos.splice(i, 1);
-    // }
-    // if(this.tasksObj.inProgress.includes(i))
-    // {
-    //   this.tasksObj.inProgress.splice(i, 1);
-    // }
-    // if(this.tasksObj.finished.includes(i))
-    // {
-    //   this.tasksObj.finished.splice(i, 1);
-    // }
-    console.log(arr.indexOf(i));
     let index = arr.indexOf(i);
     arr.splice(index, 1);
-    console.log(this.tasksObj)
   }
 
-  openEditDialog(task: Task)
+  openEditDialog(arr: Array<Task>, task: Task)
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
-      data: {taskText: task.taskText,
-        taskStatus: task.taskStatus}
+      data: {
+        taskText: task.taskText,
+        taskStatus: task.taskStatus
+      }
     });
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!task && res))
       .subscribe(result => {
-        this.editTask(task, result);
+        this.editTask(arr, task, result);
     });
   }
 
   openDeleteDialog(arr: Array<Task>, element: Task)
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
-      data: {taskText: element.taskText}
+      data: {
+        taskText: element.taskText
+      }
     });
 
     dialogRef.backdropClick()

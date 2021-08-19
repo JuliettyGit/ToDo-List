@@ -34,7 +34,9 @@ button{
 }
 
 .task-container{
-  border: solid 1px #ccc;
+  background: #e0e0e0;
+  box-shadow:  5px 5px 9px #cacaca,
+  -5px -5px 9px #f6f6f6;
   border-radius: 4px;
   padding: 0.5em;
   margin-top: 1.5em;
@@ -52,23 +54,19 @@ button{
 }
 
 .toDoContainer{
-  /*background: rgba(253, 44, 65, 0.7);*/
-  background-color: var(--red);
+  background-color: var(--yelow);
 }
 
 .inProgressContainer{
-  /*background: rgba(13, 110, 253, 0.7);*/
   background-color: var(--blue);
 }
 
 .finishedContainer{
-  /*background: rgba(33, 179, 64, 0.7);*/
   background-color: var(--green);
 }
 
 .task-list {
-  border: solid 1px #ccc;
-  min-height: 50px;
+  min-height: 45px;
   background: white;
   border-radius: 4px;
   overflow: hidden;
@@ -116,18 +114,13 @@ button{
   display: flex;
 }
 
-.taskText{
-  font-weight: 400;
-  width: 40em;
-}
-
 app-edit-button, app-delete-button{
   cursor: pointer;
   float: right;
 }
 
 .btnPrimary{
-  background-color: var(--yelow);
+  background-color: #802BB1;
   color: white;
 }
 

@@ -5,16 +5,16 @@
         <mat-label>Tasks</mat-label>
         <input autocomplete="off"
                [(ngModel)] ="taskInput"
-               matInput (keydown.enter)="addTask()">
+               matInput (keydown.enter)="checkUserInput()">
       </mat-form-field>
 
       <app-option-list (change)="writeStatus($event)"
-                       (keyup.enter)="addTask()">
+                       (keyup.enter)="checkUserInput()">
       </app-option-list>
 
       <button id="addBtn" mat-flat-button
               class="btnPrimary"
-              (click)="addTask()">Add Task</button>
+              (click)="checkUserInput()">Add Task</button>
     </div>
 
     <div class="d-flex" cdkDropListGroup>
@@ -32,7 +32,7 @@
             {{tasksObj.toDos[i].taskText}}
 
             <app-delete-button (click)="openDeleteDialog(tasksObj.toDos ,tasksObj.toDos[i])"></app-delete-button>
-            <app-edit-button (click)="whatsTask(tasksObj.toDos[i])"></app-edit-button>
+            <app-edit-button (click)="openEditDialog(tasksObj.toDos, tasksObj.toDos[i])"></app-edit-button>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
           {{tasksObj.inProgress[i].taskText}}
 
           <app-delete-button (click)="openDeleteDialog(tasksObj.inProgress,tasksObj.inProgress[i])"></app-delete-button>
-          <app-edit-button (click)="whatsTask(tasksObj.inProgress[i])"></app-edit-button>
+          <app-edit-button (click)="openEditDialog(tasksObj.inProgress, tasksObj.inProgress[i])"></app-edit-button>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
               {{tasksObj.finished[i].taskText}}
 
               <app-delete-button (click)="openDeleteDialog(tasksObj.finished ,tasksObj.finished[i])"></app-delete-button>
-              <app-edit-button (click)="whatsTask(tasksObj.finished[i])"></app-edit-button>
+              <app-edit-button (click)="openEditDialog(tasksObj.finished, tasksObj.finished[i])"></app-edit-button>
             </div>
         </div>
     </div>

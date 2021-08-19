@@ -33,7 +33,6 @@ export class EditModalDialogComponent implements OnInit
   {
     if(this.data.taskText !== ''){
       this.dialogRef.close( {taskText: this.data.taskText, taskStatus: this.status});
-      console.log(this.status)
     }
     else
     {
