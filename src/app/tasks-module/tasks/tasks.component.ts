@@ -61,7 +61,8 @@ export class TasksComponent implements OnInit {
     return this.tasksObj;
   }
 
-  checkUserInput(){
+  checkUserInput()
+  {
     if(!this.status)
     {
       this.status = taskStatuses[0].status;
@@ -73,14 +74,16 @@ export class TasksComponent implements OnInit {
         taskStatus: this.status,
       };
 
+    let tasksArr = Object.values(this.tasksObj);
+    let newTasksArr = Array.prototype.concat.apply([], tasksArr);
+
     if(newTask.taskText === '')
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
+      console.log(this.tasksObj)
     }
 
-    let tasksArr = Object.values(this.tasksObj);
-    let newTasksArr = Array.prototype.concat.apply([], tasksArr);
     if(newTasksArr.some(task => task.taskText == newTask.taskText))
     {
         const alertText = "This task has already created";
@@ -92,40 +95,6 @@ export class TasksComponent implements OnInit {
     {
     this.addTask(newTask);
     }
-  }
-
-  editTask(arr: Array<Task>,task: any, result: Task)
-  {
-    let index = arr.indexOf(task);
-    arr.splice(index, 1, result);
-    task.taskStatus = result.taskStatus;
-
-    if(task.taskStatus == taskStatuses[0].status)
-    {
-      arr.splice(task, 1);
-      this.tasksObj.toDos.push(task);
-    }
-
-    if(task.taskStatus == taskStatuses[1].status)
-    {
-      arr.splice(task, 1);
-      this.tasksObj.inProgress.push(task);
-    }
-
-    if(task.taskStatus == taskStatuses[2].status)
-    {
-      arr.splice(task, 1);
-      this.tasksObj.finished.push(task);
-    }
-  }
-
-  deleteTask(arr: Array<Task>, i: Task)
-  {
-    arr = arr.filter((task) => task !== i);
-    console.log(arr);
-    // let index = arr.indexOf(i);
-    // arr.splice(index, 1);
-    console.log(this.tasksObj)
   }
 
   openEditDialog(arr: Array<Task>, task: Task)
@@ -144,7 +113,34 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(arr: Array<Task>, element: Task)
+  editTask(arr: Array<Task>, task: any, result: Task)
+  {
+    let index = arr.indexOf(task);
+    arr.splice(index, 1, result);
+    task.taskStatus = result.taskStatus;
+    task.taskText = result.taskText;
+
+    if(task.taskStatus == taskStatuses[0].status)
+    {
+      arr.splice(task, 1);
+      this.tasksObj.toDos.push(task);
+    }
+
+    if(task.taskStatus == taskStatuses[1].status)
+    {
+      arr.splice(task, 1);
+      this.tasksObj.inProgress.push(task);
+    }
+
+    if(task.taskStatus == taskStatuses[2].status)
+    {
+      arr.splice(task, 1);
+      this.tasksObj.finished.push(task);
+    }
+    console.log(this.tasksObj)
+  }
+
+  openDeleteDialog(element: Task)
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {
@@ -159,7 +155,27 @@ export class TasksComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(filter(res => !!res))
-      .subscribe(() => this.deleteTask(arr, element));
+      .subscribe(() => this.deleteTask(element));
+  }
+
+  deleteTask(el: Task)
+  {
+    // let newTasksArr = Array.prototype.concat.apply([], Object.values(this.tasksObj));
+    // newTasksArr = newTasksArr.filter(task => task.taskText !== el.taskText);
+    // console.log(newTasksArr, this.tasksObj);
+
+    // for (let elem in newTasksArr)
+    // {
+    //   let qwe = newTasksArr[elem].taskText;
+    //   console.log(qwe);
+    //   newTasksArr = newTasksArr.filter(qwe => qwe == el.taskText);
+    //   console.log(newTasksArr)
+    // }
+
+    //work
+    this.tasksObj.toDos = this.tasksObj.toDos.filter(task => task.taskText !== el.taskText);
+    this.tasksObj.inProgress = this.tasksObj.inProgress.filter(task => task.taskText !== el.taskText);
+    this.tasksObj.finished = this.tasksObj.finished.filter(task => task.taskText !== el.taskText)
   }
 
   openAlertDialog(alertText: string)
