@@ -81,7 +81,6 @@ export class TasksComponent implements OnInit {
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
-      console.log(this.tasksObj)
     }
 
     if(newTasksArr.some(task => task.taskText == newTask.taskText))
@@ -137,7 +136,6 @@ export class TasksComponent implements OnInit {
       arr.splice(task, 1);
       this.tasksObj.finished.push(task);
     }
-    console.log(this.tasksObj)
   }
 
   openDeleteDialog(element: Task)
@@ -160,19 +158,6 @@ export class TasksComponent implements OnInit {
 
   deleteTask(el: Task)
   {
-    // let newTasksArr = Array.prototype.concat.apply([], Object.values(this.tasksObj));
-    // newTasksArr = newTasksArr.filter(task => task.taskText !== el.taskText);
-    // console.log(newTasksArr, this.tasksObj);
-
-    // for (let elem in newTasksArr)
-    // {
-    //   let qwe = newTasksArr[elem].taskText;
-    //   console.log(qwe);
-    //   newTasksArr = newTasksArr.filter(qwe => qwe == el.taskText);
-    //   console.log(newTasksArr)
-    // }
-
-    //work
     this.tasksObj.toDos = this.tasksObj.toDos.filter(task => task.taskText !== el.taskText);
     this.tasksObj.inProgress = this.tasksObj.inProgress.filter(task => task.taskText !== el.taskText);
     this.tasksObj.finished = this.tasksObj.finished.filter(task => task.taskText !== el.taskText)
