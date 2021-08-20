@@ -38,28 +38,23 @@ export class TasksComponent implements OnInit {
 
   addTask(newTask: Task)
   {
-    if(newTask.taskStatus === taskStatuses[0].status
-      && !(this.tasksObj.toDos.some(e => e.taskText === newTask.taskText))
-      && !(this.tasksObj.inProgress.some(e => e.taskText === newTask.taskText))
-      && !(this.tasksObj.finished.some(e => e.taskText === newTask.taskText)))
-    {
-      this.tasksObj.toDos.push(newTask);
-    }
 
-    if(newTask.taskStatus === taskStatuses[1].status
-      && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-      && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-      && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText))
-    )
+    switch (newTask.taskStatus)
     {
-      this.tasksObj.inProgress.push(newTask);
-    }
-    if(newTask.taskStatus === taskStatuses[2].status
-      && !(this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-      && !(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-      && !(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
-    {
-      this.tasksObj.finished.push(newTask);
+      case taskStatuses[0].status:
+      {
+          this.tasksObj.toDos.push(newTask);
+          break;
+      }
+      case taskStatuses[1].status:
+      {
+        this.tasksObj.inProgress.push(newTask);
+        break;
+      }
+      case taskStatuses[2].status:
+      {
+        this.tasksObj.finished.push(newTask);
+      }
     }
 
     this.taskInput = '';
@@ -84,21 +79,19 @@ export class TasksComponent implements OnInit {
       this.openAlertDialog(alertText);
     }
 
-    if((this.tasksObj.toDos.some(task => task.taskText === newTask.taskText))
-       ||(this.tasksObj.inProgress.some(task => task.taskText === newTask.taskText))
-       ||(this.tasksObj.finished.some(task => task.taskText === newTask.taskText)))
+    let tasksArr = Object.values(this.tasksObj);
+    let newTasksArr = Array.prototype.concat.apply([], tasksArr);
+    if(newTasksArr.some(task => task.taskText == newTask.taskText))
     {
-      const alertText = "This task has already created";
-      this.openAlertDialog(alertText);
+        const alertText = "This task has already created";
+        this.openAlertDialog(alertText);
+        this.taskInput = '';
     }
+
     else
     {
     this.addTask(newTask);
     }
-
-    let qwe = Array.from(Object.values(this.tasksObj))
-    console.log(typeof qwe);
-    console.log(typeof Object.entries(this.tasksObj))
   }
 
   editTask(arr: Array<Task>,task: any, result: Task)
@@ -128,8 +121,11 @@ export class TasksComponent implements OnInit {
 
   deleteTask(arr: Array<Task>, i: Task)
   {
-    let index = arr.indexOf(i);
-    arr.splice(index, 1);
+    arr = arr.filter((task) => task !== i);
+    console.log(arr);
+    // let index = arr.indexOf(i);
+    // arr.splice(index, 1);
+    console.log(this.tasksObj)
   }
 
   openEditDialog(arr: Array<Task>, task: Task)
