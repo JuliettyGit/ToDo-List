@@ -42,19 +42,15 @@ export class TasksComponent implements OnInit {
     switch (newTask.taskStatus)
     {
       case taskStatuses[0].status:
-      {
           this.tasksObj.toDos.push(newTask);
           break;
-      }
+
       case taskStatuses[1].status:
-      {
         this.tasksObj.inProgress.push(newTask);
         break;
-      }
+
       case taskStatuses[2].status:
-      {
         this.tasksObj.finished.push(newTask);
-      }
     }
 
     this.taskInput = '';
@@ -120,22 +116,16 @@ export class TasksComponent implements OnInit {
     switch (result.taskStatus)
     {
       case taskStatuses[0].status:
-      {
         this.tasksObj.toDos.push(result);
         break;
-      }
 
       case taskStatuses[1].status:
-      {
           this.tasksObj.inProgress.push(result);
           break;
-      }
 
       case taskStatuses[2].status:
-      {
           this.tasksObj.finished.push(result);
           break;
-      }
     }
   }
 
