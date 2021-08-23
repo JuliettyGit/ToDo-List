@@ -8,11 +8,12 @@ import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
-@Component({
+@Component(
+  {
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
-})
+  })
 
 export class TasksComponent implements OnInit {
 
@@ -31,12 +32,12 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  writeStatus(event: string)
+  writeStatus( event: string )
   {
     this.status = event;
   }
 
-  addTask(newTask: Task)
+  addTask( newTask: Task )
   {
     switch (newTask.taskStatus)
     {
@@ -62,7 +63,7 @@ export class TasksComponent implements OnInit {
 
   checkUserInput()
   {
-    if(!this.status)
+    if( !this.status )
     {
       this.status = taskStatuses[0].status;
     }
@@ -76,26 +77,24 @@ export class TasksComponent implements OnInit {
     let tasksArr = Object.values(this.tasksObj);
     let newTasksArr = Array.prototype.concat.apply([], tasksArr);
 
-    if(newTask.taskText === '')
+    if( newTask.taskText === '' )
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
     }
 
-    else if(newTasksArr.some(task => task.taskText == newTask.taskText))
+    else if( newTasksArr.some(task => task.taskText == newTask.taskText) )
     {
         const alertText = "This task has already created";
-        this.openAlertDialog(alertText);
+        this.openAlertDialog( alertText );
         this.taskInput = '';
     }
 
     else
-    {
-    this.addTask(newTask);
-    }
+      this.addTask( newTask );
   }
 
-  openEditDialog(arr: Array<Task>, task: Task)
+  openEditDialog( task: Task )
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
       data: {
@@ -105,39 +104,42 @@ export class TasksComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(res => !!task && res))
+      .pipe(filter(res => !!task && res ))
       .subscribe(result => {
-        this.editTask(arr, task, result);
+        this.editTask( task, result );
     });
   }
 
-  editTask(arr: Array<Task>, task: any, result: Task)
+  editTask( editingTask: Task, result: Task )
   {
-    let index = arr.indexOf(task);
-    arr.splice(index, 1, result);
-    task.taskStatus = result.taskStatus;
-    task.taskText = result.taskText;
-
-    if(task.taskStatus == taskStatuses[0].status)
+    for ( let key in this.tasksObj )
     {
-      arr.splice(task, 1);
-      this.tasksObj.toDos.push(task);
+      this.tasksObj[key] = this.tasksObj[key].filter((task: Task) => task !== editingTask);
     }
 
-    if(task.taskStatus == taskStatuses[1].status)
+    switch (result.taskStatus)
     {
-      arr.splice(task, 1);
-      this.tasksObj.inProgress.push(task);
-    }
+      case taskStatuses[0].status:
+      {
+        this.tasksObj.toDos.push(result);
+        break;
+      }
 
-    if(task.taskStatus == taskStatuses[2].status)
-    {
-      arr.splice(task, 1);
-      this.tasksObj.finished.push(task);
+      case taskStatuses[1].status:
+      {
+          this.tasksObj.inProgress.push(result);
+          break;
+      }
+
+      case taskStatuses[2].status:
+      {
+          this.tasksObj.finished.push(result);
+          break;
+      }
     }
   }
 
-  openDeleteDialog(element: Task)
+  openDeleteDialog( element: Task )
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {
@@ -155,39 +157,34 @@ export class TasksComponent implements OnInit {
       .subscribe(() => this.deleteTask(element));
   }
 
-  deleteTask(el: Task)
+  deleteTask( element: Task )
   {
-    for (let key in this.tasksObj)
+    for ( let key in this.tasksObj )
     {
-      this.tasksObj[key] = this.tasksObj[key].filter((task: Task) => task.taskText !== el.taskText);
+      this.tasksObj[key] = this.tasksObj[key].filter((task: Task) => task.taskText !== element.taskText);
     }
-
-    // //work
-    // this.tasksObj.toDos = this.tasksObj.toDos.filter(task => task.taskText !== el.taskText);
-    // this.tasksObj.inProgress = this.tasksObj.inProgress.filter(task => task.taskText !== el.taskText);
-    // this.tasksObj.finished = this.tasksObj.finished.filter(task => task.taskText !== el.taskText)
   }
 
-  openAlertDialog(alertText: string)
+  openAlertDialog( alertText: string )
   {
-    this.dialog.open(AlertModalDialogComponent, {
+    this.dialog.open( AlertModalDialogComponent, {
       data: { alertText: alertText }
     });
   }
 
-  drop(event: CdkDragDrop<Task[]>)
+  drop( event: CdkDragDrop<Task[]> )
   {
-    if (event.previousContainer === event.container)
+    if ( event.previousContainer === event.container )
     {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray( event.container.data, event.previousIndex, event.currentIndex );
     }
 
     else
     {
-      transferArrayItem(event.previousContainer.data,
+      transferArrayItem( event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex );
     }
   }
 
