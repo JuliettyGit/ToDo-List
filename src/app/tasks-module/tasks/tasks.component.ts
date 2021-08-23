@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
   taskInput: string = '';
   status: string = '';
 
-  tasksObj = {
+  tasksObj: any = {
     toDos: new Array<Task>(),
     inProgress: new Array<Task>(),
     finished: new Array<Task>(),
@@ -38,7 +38,6 @@ export class TasksComponent implements OnInit {
 
   addTask(newTask: Task)
   {
-
     switch (newTask.taskStatus)
     {
       case taskStatuses[0].status:
@@ -83,7 +82,7 @@ export class TasksComponent implements OnInit {
       this.openAlertDialog(alertText);
     }
 
-    if(newTasksArr.some(task => task.taskText == newTask.taskText))
+    else if(newTasksArr.some(task => task.taskText == newTask.taskText))
     {
         const alertText = "This task has already created";
         this.openAlertDialog(alertText);
@@ -158,9 +157,15 @@ export class TasksComponent implements OnInit {
 
   deleteTask(el: Task)
   {
-    this.tasksObj.toDos = this.tasksObj.toDos.filter(task => task.taskText !== el.taskText);
-    this.tasksObj.inProgress = this.tasksObj.inProgress.filter(task => task.taskText !== el.taskText);
-    this.tasksObj.finished = this.tasksObj.finished.filter(task => task.taskText !== el.taskText)
+    for (let key in this.tasksObj)
+    {
+      this.tasksObj[key] = this.tasksObj[key].filter((task: Task) => task.taskText !== el.taskText);
+    }
+
+    // //work
+    // this.tasksObj.toDos = this.tasksObj.toDos.filter(task => task.taskText !== el.taskText);
+    // this.tasksObj.inProgress = this.tasksObj.inProgress.filter(task => task.taskText !== el.taskText);
+    // this.tasksObj.finished = this.tasksObj.finished.filter(task => task.taskText !== el.taskText)
   }
 
   openAlertDialog(alertText: string)
