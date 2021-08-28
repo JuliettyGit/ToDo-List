@@ -1,33 +1,79 @@
-<div class="inputForm">
-  <h1>Tasks Tracker</h1>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Tasks</mat-label>
-    <input [(ngModel)] ="taskInput" matInput>
-  </mat-form-field>
-    <button id="addBtn" mat-flat-button color="accent" (click)="addTask()" >Add Task</button>
+<div class="inputForm center">
+  <h1 class="center">Tasks Tracker</h1>
+    <div class="d-flex">
+      <mat-form-field class="taskNameInput" appearance="fill">
+        <mat-label>Tasks</mat-label>
+        <input autocomplete="off"
+               [(ngModel)] ="taskInput"
+               matInput
+               (keydown.enter)="checkUserInput()">
+      </mat-form-field>
 
-  <div>
-    <mat-selection-list [multiple]="false">
-      <mat-list-option  id="option" *ngFor="let task of taskItems; let i = index;" [value]="task">
-        {{task}}
-        <div class="detail-options">
-          <mat-icon id="edit"
-            color="accent"
-          (click)="openEditDialog(i)">
-            edit</mat-icon>
-          <mat-icon color="warn"
-          id="delete"
-          (click)="openDeleteDialog(i)">
-            remove_circle
-          </mat-icon>
+      <app-option-list (change)="writeStatus($event)"
+                       (keydown.enter)="checkUserInput()">
+      </app-option-list>
 
+      <button id="addBtn" mat-flat-button
+              class="btnPrimary"
+              (click)="checkUserInput()">Add Task</button>
+    </div>
+
+    <div class="d-flex" cdkDropListGroup>
+      <div class="task-container toDoContainer">
+        <h2>To do</h2>
+
+        <div
+          class="task-list"
+          cdkDropList
+          [cdkDropListData]="tasksObj.toDos"
+          (cdkDropListDropped)="drop($event)">
+
+          <div class="example-box"
+               *ngFor="let task of tasksObj.toDos let i = index;" cdkDrag>
+            {{tasksObj.toDos[i].taskText}}
+
+            <app-delete-button (click)="openDeleteDialog(tasksObj.toDos[i])"></app-delete-button>
+            <app-edit-button (click)="openEditDialog(tasksObj.toDos[i])"></app-edit-button>
+          </div>
         </div>
-      </mat-list-option>
+      </div>
 
-    </mat-selection-list>
+    <div class="task-container inProgressContainer">
+      <h2>In Progress</h2>
+
+      <div
+        class="task-list"
+        cdkDropList
+        [cdkDropListData]="tasksObj.inProgress"
+        (cdkDropListDropped)="drop($event)">
+
+        <div class="example-box"
+             *ngFor="let task of tasksObj.inProgress let i = index;" cdkDrag>
+          {{tasksObj.inProgress[i].taskText}}
+
+          <app-delete-button (click)="openDeleteDialog(tasksObj.inProgress[i])"></app-delete-button>
+          <app-edit-button (click)="openEditDialog(tasksObj.inProgress[i])"></app-edit-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-container finishedContainer">
+      <h2>Finished</h2>
+
+        <div
+          class="task-list"
+          cdkDropList
+          [cdkDropListData]="tasksObj.finished"
+          (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box"
+                 *ngFor="let task of tasksObj.finished let i = index;" cdkDrag>
+              {{tasksObj.finished[i].taskText}}
+
+              <app-delete-button (click)="openDeleteDialog(tasksObj.finished[i])"></app-delete-button>
+              <app-edit-button (click)="openEditDialog(tasksObj.finished[i])"></app-edit-button>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
-
-
-
-

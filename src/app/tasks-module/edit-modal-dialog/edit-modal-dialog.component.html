@@ -2,8 +2,27 @@
 <textarea matInput
           cdkTextareaAutosize
           cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="5" [(ngModel)]="data.task"></textarea>
+          cdkAutosizeMaxRows="5"
+          [(ngModel)]="data.taskText">
+
+</textarea>
+
+<app-option-list (change)="writeStatus($event)"></app-option-list>
+
+
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="close()" >Cancel</button>
-  <button mat-button mat-dialog-close [mat-dialog-close]="data.task">Save</button>
+  <button mat-button
+          mat-dialog-close
+          (click)="close()"
+          color="accent">
+    Cancel
+  </button>
+
+  <button mat-button
+          mat-dialog-close
+          (keydown.enter)="save()"
+          (click)="save()"
+          color="primary">
+    Save
+  </button>
 </div>

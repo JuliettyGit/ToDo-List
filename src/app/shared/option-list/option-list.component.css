@@ -1,0 +1,46 @@
+.statusSelect{
+  min-width: 150px;
+  width: auto;
+  line-height: 1.5em;
+  height: 4.1em;
+  margin-right: 1em;
+}
+
+mat-option{
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #f8f9fa;
+}
+
+.toDo{
+  background: rgba(253, 44, 65, 0.7);
+  color: #f8f9fa;
+}
+
+.toDo:hover {
+  background: #fd2c41;
+}
+
+.inProgress {
+  background: rgba(13, 110, 253, 0.7);
+}
+
+.inProgress:hover {
+  background: #0d6efd;
+}
+
+.finished {
+  background: rgba(33, 179, 64, 0.7);
+}
+
+.finished:hover {
+  background: #21b340;
+}
+
+.status{
+  background: #0d6efd;
+  border-radius: 5px;
+  padding: 0.3em 0.5em;
+  color: #f8f9fa;
+}
