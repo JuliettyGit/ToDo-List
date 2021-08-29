@@ -15,13 +15,12 @@ export class OptionListComponent implements OnInit {
   taskStatuses = taskStatuses;
 
 
-  constructor()
-  { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void{}
 
-  setStatus(event: string){
+  setStatus(event: string): void
+  {
     this.change.emit(event);
   }
 }

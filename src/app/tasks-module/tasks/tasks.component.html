@@ -25,15 +25,15 @@
         <div
           class="task-list"
           cdkDropList
-          [cdkDropListData]="tasksObj.toDos"
+          [cdkDropListData]="tasks.toDos"
           (cdkDropListDropped)="drop($event)">
 
           <div class="example-box"
-               *ngFor="let task of tasksObj.toDos let i = index;" cdkDrag>
-            {{tasksObj.toDos[i].taskText}}
+               *ngFor="let task of tasks.toDos let i = index;" cdkDrag>
+            {{tasks.toDos[i].taskText}}
 
-            <app-delete-button (click)="openDeleteDialog(tasksObj.toDos[i])"></app-delete-button>
-            <app-edit-button (click)="openEditDialog(tasksObj.toDos[i])"></app-edit-button>
+            <app-delete-button (click)="openDeleteDialog(tasks.toDos[i])"></app-delete-button>
+            <app-edit-button (click)="openEditDialog(tasks.toDos[i])"></app-edit-button>
           </div>
         </div>
       </div>
@@ -44,15 +44,15 @@
       <div
         class="task-list"
         cdkDropList
-        [cdkDropListData]="tasksObj.inProgress"
+        [cdkDropListData]="tasks.inProgress"
         (cdkDropListDropped)="drop($event)">
 
         <div class="example-box"
-             *ngFor="let task of tasksObj.inProgress let i = index;" cdkDrag>
-          {{tasksObj.inProgress[i].taskText}}
+             *ngFor="let task of tasks.inProgress let i = index;" cdkDrag>
+          {{tasks.inProgress[i].taskText}}
 
-          <app-delete-button (click)="openDeleteDialog(tasksObj.inProgress[i])"></app-delete-button>
-          <app-edit-button (click)="openEditDialog(tasksObj.inProgress[i])"></app-edit-button>
+          <app-delete-button (click)="openDeleteDialog(tasks.inProgress[i])"></app-delete-button>
+          <app-edit-button (click)="openEditDialog(tasks.inProgress[i])"></app-edit-button>
         </div>
       </div>
     </div>
@@ -63,15 +63,15 @@
         <div
           class="task-list"
           cdkDropList
-          [cdkDropListData]="tasksObj.finished"
+          [cdkDropListData]="tasks.finished"
           (cdkDropListDropped)="drop($event)">
 
             <div class="example-box"
-                 *ngFor="let task of tasksObj.finished let i = index;" cdkDrag>
-              {{tasksObj.finished[i].taskText}}
+                 *ngFor="let task of tasks.finished let i = index;" cdkDrag>
+              {{tasks.finished[i].taskText}}
 
-              <app-delete-button (click)="openDeleteDialog(tasksObj.finished[i])"></app-delete-button>
-              <app-edit-button (click)="openEditDialog(tasksObj.finished[i])"></app-edit-button>
+              <app-delete-button (click)="openDeleteDialog(tasks.finished[i])"></app-delete-button>
+              <app-edit-button (click)="openEditDialog(tasks.finished[i])"></app-edit-button>
             </div>
         </div>
     </div>
