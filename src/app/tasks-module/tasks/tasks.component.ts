@@ -7,12 +7,14 @@ import { Task } from './task';
 import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { Store } from "@ngrx/store";
+import {addTask} from "../../state/actions";
 
 @Component(
   {
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css'],
+    selector: 'app-tasks',
+    templateUrl: './tasks.component.html',
+    styleUrls: ['./tasks.component.css'],
   })
 
 export class TasksComponent implements OnInit {
@@ -28,22 +30,23 @@ export class TasksComponent implements OnInit {
     finished: new Array<Task>(),
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              private store: Store) {}
 
   ngOnInit(): void {}
 
-  writeStatus( event: string ): void
+  writeStatus(event: string): void
   {
     this.status = event;
   }
 
-  addTask( newTask: Task ): void
+  addTask(newTask: Task): void
   {
     switch (newTask.taskStatus)
     {
       case taskStatuses[0].status:
-          this.tasks.toDos.push(newTask);
-          break;
+        this.tasks.toDos.push(newTask);
+        break;
 
       case taskStatuses[1].status:
         this.tasks.inProgress.push(newTask);
@@ -53,12 +56,15 @@ export class TasksComponent implements OnInit {
         this.tasks.finished.push(newTask);
     }
 
+    this.store.dispatch(addTask(newTask));
+
     this.taskInput = '';
+    this.status = taskStatuses[0].status;
   }
 
   checkUserInput(): void
   {
-    if( !this.status )
+    if(!this.status)
     {
       this.status = taskStatuses[0].status;
     }
@@ -72,24 +78,32 @@ export class TasksComponent implements OnInit {
     let tasksArr = Object.values(this.tasks);
     let newTasksArr = Array.prototype.concat.apply([], tasksArr);
 
-    if( !newTask.taskText )
+    if(!newTask.taskText)
     {
       const alertText = "Unable to add empty task!";
       this.openAlertDialog(alertText);
     }
 
-    else if( newTasksArr.some(task => task.taskText == newTask.taskText) )
+    else if(newTasksArr.some(task => task.taskText == newTask.taskText))
     {
-        const alertText = "This task has already created";
-        this.openAlertDialog( alertText );
-        this.taskInput = '';
+      const alertText = "This task has already created";
+      this.openAlertDialog( alertText );
+      this.taskInput = '';
     }
 
     else
       this.addTask( newTask );
   }
 
-  openEditDialog( editingTask: Task ): void
+  filterTasks(filteredTask: Task)
+  {
+    for (let key in this.tasks)
+    {
+      this.tasks[key] = this.tasks[key].filter((task: Task) => task !== filteredTask);
+    }
+  }
+
+  openEditDialog(editingTask: Task): void
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
       data: {
@@ -99,18 +113,15 @@ export class TasksComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .pipe(filter(res => !!editingTask && res ))
+      .pipe(filter(res => !!editingTask && res))
       .subscribe(result => {
-        this.editTask( editingTask, result );
-    });
+        this.editTask(editingTask, result);
+      });
   }
 
-  editTask( editingTask: Task, result: Task ): void
+  editTask(editingTask: Task, result: Task): void
   {
-    for ( let key in this.tasks )
-    {
-      this.tasks[key] = this.tasks[key].filter((task: Task) => task !== editingTask);
-    }
+    this.filterTasks(editingTask);
 
     switch (result.taskStatus)
     {
@@ -119,16 +130,16 @@ export class TasksComponent implements OnInit {
         break;
 
       case taskStatuses[1].status:
-          this.tasks.inProgress.push(result);
-          break;
+        this.tasks.inProgress.push(result);
+        break;
 
       case taskStatuses[2].status:
-          this.tasks.finished.push(result);
-          break;
+        this.tasks.finished.push(result);
+        break;
     }
   }
 
-  openDeleteDialog( taskToDelete: Task ): void
+  openDeleteDialog(taskToDelete: Task): void
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {
@@ -146,36 +157,33 @@ export class TasksComponent implements OnInit {
       .subscribe(() => this.deleteTask(taskToDelete));
   }
 
-  deleteTask( taskToDelete: Task ): void
+  deleteTask(taskToDelete: Task): void
   {
-    for ( let key in this.tasks )
-    {
-      this.tasks[key] = this.tasks[key].filter((task: Task) => task !== taskToDelete);
-    }
+    this.filterTasks(taskToDelete);
   }
 
-  openAlertDialog( alertText: string ): void
+  openAlertDialog(alertText: string): void
   {
-    this.dialog.open( AlertModalDialogComponent, {
+    this.dialog.open(AlertModalDialogComponent, {
       data: {
         alertText: alertText
       }
     });
   }
 
-  drop( event: CdkDragDrop<Task[]> ): void
+  drop(event: CdkDragDrop<Task[]>): void
   {
-    if ( event.previousContainer === event.container )
+    if (event.previousContainer === event.container)
     {
-      moveItemInArray( event.container.data, event.previousIndex, event.currentIndex );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
 
     else
     {
-      transferArrayItem( event.previousContainer.data,
+      transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex );
+        event.currentIndex);
     }
   }
 
