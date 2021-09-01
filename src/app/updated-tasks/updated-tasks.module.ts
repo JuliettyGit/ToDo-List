@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import * as fromList from 'src/app/store/reducers/reducers';
 import { UpdatedTasksComponent } from './updated-tasks/updated-tasks.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -18,33 +17,26 @@ import { AlertModalDialogComponent } from "../tasks-module/alert-modal-dialog/al
 import { EditModalDialogComponent } from "../tasks-module/edit-modal-dialog/edit-modal-dialog.component";
 import { EditButtonComponent } from "../tasks-module/edit-button/edit-button.component";
 import { DeleteButtonComponent } from "../tasks-module/delete-button/delete-button.component";
+import { appReducer, TODO_REDUCER_NODE } from '../store/reducers/app.reducers';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     UpdatedTasksComponent,
-    EditModalDialogComponent,
-    DeleteModalDialogComponent,
-    AlertModalDialogComponent,
-    EditButtonComponent,
-    DeleteButtonComponent,
   ],
   exports: [
     UpdatedTasksComponent,
   ],
   imports: [
     CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatSelectModule,
-    MatButtonModule,
-    FormsModule,
-    MatIconModule,
-    MatDialogModule,
-    FormsModule,
-    SharedModule,
-    DragDropModule,
-    StoreModule.forRoot(fromList.taskListReducer),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: UpdatedTasksComponent
+      }
+    ]),
+
+    StoreModule.forFeature(TODO_REDUCER_NODE, appReducer),
   ],
 })
 

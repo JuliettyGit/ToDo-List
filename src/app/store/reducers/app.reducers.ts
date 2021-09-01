@@ -1,22 +1,41 @@
-import { IAppState } from "../../shared/interfaces/IAppState";
-import { AddNewTask, EUserActions, UserActions } from "../actions/actions";
-import { initialAppState } from "../state/app.state";
-import { ActionReducerMap, createAction, createReducer, on } from "@ngrx/store";
+import {EUserActions, UserActions} from "../actions/actions";
+import {initialAppState} from "../state/app.state";
 
-export const appReducers: ActionReducerMap<IAppState> = {
-  tasks: appReducer
-};
+export const TODO_REDUCER_NODE = 'toDo';
 
-export function appReducer(
-  state = initialAppState,
-  action: UserActions)
+// export function appReducer(
+//   state = initialAppState,
+//   action: UserActions)
+// {
+//   switch (action.type) {
+//     case EUserActions.AddNewTask:
+//     {
+//         return {
+//           ...state,
+//           tasks: [...state.tasks, action.payload],
+//         };
+//     }
+//     default:
+//     {
+//       return state
+//     }
+//   }
+// }
+export const appReducer = (state = initialAppState, action: UserActions) =>
 {
-  // const task = action.payload;
-  // const tasks = [...state.tasks, task];
-  return {
-    ...state,
-    tasks: [...state.tasks, action.payload],
-  };
+    switch (action.type) {
+    case EUserActions.AddNewTask:
+    {
+        return {
+          ...state,
+          tasks: [...state.tasks, action.payload],
+        };
+    }
+    default:
+    {
+      return state
+    }
+  }
 }
 
 

@@ -5,16 +5,17 @@
 //   createSelector,
 //   MetaReducer
 // } from '@ngrx/store';
-// import { ITaskListState } from 'src/app/shared/interfaces/taskListState';
 // import { taskListReducer } from 'src/app/store/reducers/reducers'
 // import { environment } from '../../environments/environment';
+// import {IAppState} from "../shared/interfaces/IAppState";
+// import { appReducer } from "../store/reducers/app.reducers";
 //
 // export interface State {
-//   TaskList: ITaskListState;
+//   TaskList: IAppState;
 // }
 //
 // export const reducers: ActionReducerMap<State> = {
-//   TaskList: taskListReducer,
+//   TaskList: appReducer,
 // };
 //
 //

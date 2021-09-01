@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { Store } from "@ngrx/store";
-import {AddNewTask, DeleteTask, EditTask} from "../../store/actions/actions";
+import { AddNewTask, DeleteTask, EditTask } from "../../store/actions/actions";
 
 @Component(
   {
