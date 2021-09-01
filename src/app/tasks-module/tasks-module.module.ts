@@ -17,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EditButtonComponent } from './edit-button/edit-button.component';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { RouterModule } from "@angular/router";
+import {taskTrackerRoutes} from "../shared/constants/routes/tasksTrackerRoutes";
 
 @NgModule({
   declarations: [
@@ -32,12 +33,7 @@ import { RouterModule } from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      {
-        path: 'tasksTracker',
-        component: TasksComponent
-      }
-    ]),
+    RouterModule.forChild(taskTrackerRoutes),
     MatFormFieldModule,
     MatInputModule,
     MatListModule,

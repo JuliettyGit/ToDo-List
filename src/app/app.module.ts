@@ -16,18 +16,14 @@ import { UpdatedTasksModule } from "./updated-tasks/updated-tasks.module";
 import { RouterModule } from "@angular/router";
 import {TasksComponent} from "./tasks-module/tasks/tasks.component";
 import { TasksModuleModule } from "./tasks-module/tasks-module.module";
+import {errorRoutes} from "./shared/constants/routes/errorsRoutes";
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    RouterModule.forRoot([
-      {
-        path: '**',
-        redirectTo: ''
-      },
-    ]),
+    RouterModule.forRoot(errorRoutes),
     BrowserModule,
     AppRoutingModule,
     MatFormFieldModule,
