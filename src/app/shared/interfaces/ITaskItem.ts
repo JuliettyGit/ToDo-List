@@ -1,4 +1,4 @@
-export interface Task {
+export interface ITaskItem {
   taskText: string;
   taskStatus: string;
 }

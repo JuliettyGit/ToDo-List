@@ -1,23 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
+import { EditModalDialogComponent} from "../../tasks-module/edit-modal-dialog/edit-modal-dialog.component";
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteModalDialogComponent } from '../delete-modal-dialog/delete-modal-dialog.component';
-import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
-import { Task } from './task';
+import { DeleteModalDialogComponent } from "../../tasks-module/delete-modal-dialog/delete-modal-dialog.component";
+import { AlertModalDialogComponent } from "../../tasks-module/alert-modal-dialog/alert-modal-dialog.component";
+import { ITaskItem} from "../../shared/interfaces/ITaskItem";
 import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { Store } from "@ngrx/store";
-import { AddNewTask } from "../../store/actions/actions";
+import {AddNewTask, DeleteTask, EditTask} from "../../store/actions/actions";
 
 @Component(
   {
-    selector: 'app-tasks',
-    templateUrl: './tasks.component.html',
-    styleUrls: ['./tasks.component.css'],
+    selector: 'app-updated-tasks',
+    templateUrl: './updated-tasks.component.html',
+    styleUrls: ['./updated-tasks.component.css']
   })
 
-export class TasksComponent implements OnInit {
+export class UpdatedTasksComponent implements OnInit {
 
   @Input() setStatus: void;
 
@@ -25,9 +25,9 @@ export class TasksComponent implements OnInit {
   status: string = '';
 
   tasks: any = {
-    toDos: new Array<Task>(),
-    inProgress: new Array<Task>(),
-    finished: new Array<Task>(),
+    toDos: new Array<ITaskItem>(),
+    inProgress: new Array<ITaskItem>(),
+    finished: new Array<ITaskItem>(),
   }
 
   constructor(public dialog: MatDialog,
@@ -40,7 +40,7 @@ export class TasksComponent implements OnInit {
     this.status = event;
   }
 
-  addTask(newTask: Task): void
+  addTask(newTask: ITaskItem): void
   {
     switch (newTask.taskStatus)
     {
@@ -69,7 +69,7 @@ export class TasksComponent implements OnInit {
       this.status = taskStatuses[0].status;
     }
 
-    let newTask: Task  =
+    let newTask: ITaskItem  =
       {
         taskText: this.taskInput.trim(),
         taskStatus: this.status,
@@ -95,15 +95,15 @@ export class TasksComponent implements OnInit {
       this.addTask( newTask );
   }
 
-  filterTasks(filteredTask: Task)
+  filterTasks(filteredTask: ITaskItem)
   {
     for (let key in this.tasks)
     {
-      this.tasks[key] = this.tasks[key].filter((task: Task) => task !== filteredTask);
+      this.tasks[key] = this.tasks[key].filter((task: ITaskItem) => task !== filteredTask);
     }
   }
 
-  openEditDialog(editingTask: Task): void
+  openEditDialog(editingTask: ITaskItem): void
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
       data: {
@@ -119,7 +119,7 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  editTask(editingTask: Task, result: Task): void
+  editTask(editingTask: ITaskItem, result: ITaskItem): void
   {
     this.filterTasks(editingTask);
 
@@ -137,9 +137,11 @@ export class TasksComponent implements OnInit {
         this.tasks.finished.push(result);
         break;
     }
+
+    this.store.dispatch(new EditTask(result));
   }
 
-  openDeleteDialog(taskToDelete: Task): void
+  openDeleteDialog(taskToDelete: ITaskItem): void
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {
@@ -157,9 +159,10 @@ export class TasksComponent implements OnInit {
       .subscribe(() => this.deleteTask(taskToDelete));
   }
 
-  deleteTask(taskToDelete: Task): void
+  deleteTask(taskToDelete: ITaskItem): void
   {
     this.filterTasks(taskToDelete);
+    this.store.dispatch(new DeleteTask(taskToDelete));
   }
 
   openAlertDialog(alertText: string): void
@@ -171,7 +174,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<Task[]>): void
+  drop(event: CdkDragDrop<ITaskItem[]>): void
   {
     if (event.previousContainer === event.container)
     {
