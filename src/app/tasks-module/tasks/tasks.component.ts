@@ -56,8 +56,6 @@ export class TasksComponent implements OnInit {
         this.tasks.finished.push(newTask);
     }
 
-    this.store.dispatch(new AddNewTask(newTask));
-
     this.taskInput = '';
     this.status = taskStatuses[0].status;
   }

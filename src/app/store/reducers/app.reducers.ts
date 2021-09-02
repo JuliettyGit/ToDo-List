@@ -1,16 +1,18 @@
-import {EUserActions, UserActions} from "../actions/actions";
-import {initialAppState} from "../state/app.state";
+import { EUserActions, UserActions } from "../actions/actions";
+import { initialAppState } from "../state/app.state";
 
 export const TODO_REDUCER_NODE = 'toDo';
 
-export const appReducer = (state = initialAppState, action: UserActions) =>
+export const appReducer =
+  (state = initialAppState, action: UserActions) =>
 {
-    switch (action.type) {
+  switch (action.type)
+  {
     case EUserActions.AddNewTask:
     {
         return {
           ...state,
-          tasks: [...state.tasks, action.payload],
+          taskList: [...state.taskList, action.payload],
         };
     }
     default:

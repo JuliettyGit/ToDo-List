@@ -6,10 +6,15 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { FormsModule } from "@angular/forms";
 import { OptionListComponent } from './option-list/option-list.component';
+import { DeleteButtonComponent } from "./delete-button/delete-button.component";
+import {EditButtonComponent} from "./edit-button/edit-button.component";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
-    OptionListComponent
+    OptionListComponent,
+    DeleteButtonComponent,
+    EditButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -18,9 +23,12 @@ import { OptionListComponent } from './option-list/option-list.component';
     MatInputModule,
     MatListModule,
     FormsModule,
+    MatIconModule,
   ],
   exports: [
-    OptionListComponent
+    OptionListComponent,
+    DeleteButtonComponent,
+    EditButtonComponent
   ]
 })
 export class SharedModule { }

@@ -14,10 +14,8 @@ import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dial
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from '../shared/shared.module';
-import { EditButtonComponent } from './edit-button/edit-button.component';
-import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { RouterModule } from "@angular/router";
-import {taskTrackerRoutes} from "../shared/constants/routes/tasksTrackerRoutes";
+import { taskTrackerRoutes } from "../shared/constants/routes/tasksTrackerRoutes";
 
 @NgModule({
   declarations: [
@@ -25,8 +23,6 @@ import {taskTrackerRoutes} from "../shared/constants/routes/tasksTrackerRoutes";
     EditModalDialogComponent,
     DeleteModalDialogComponent,
     AlertModalDialogComponent,
-    EditButtonComponent,
-    DeleteButtonComponent,
   ],
   exports: [
     TasksComponent,

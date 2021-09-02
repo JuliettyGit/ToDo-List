@@ -1,0 +1,20 @@
+<div class="inputForm center">
+  <div class="d-flex">
+    <mat-form-field class="taskNameInput"
+                    appearance="fill"
+                    autocomplete="off">
+      <mat-label>Tasks</mat-label>
+      <input autocomplete="off"
+             matInput
+             [(ngModel)]="taskName"
+             (keydown.enter)="checkUserInput()">
+    </mat-form-field>
+
+    <app-option-list (change)="writeStatus($event)"></app-option-list>
+
+    <button id="addBtn" mat-flat-button
+            class="btnPrimary"
+            (click)="checkUserInput()"
+            [disabled]="!taskName" >Add Task</button>
+  </div>
+</div>

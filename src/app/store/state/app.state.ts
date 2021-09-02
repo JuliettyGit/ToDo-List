@@ -1,7 +1,7 @@
 import { IAppState } from "../../shared/interfaces/IAppState";
 
 export const initialAppState: IAppState = {
-  tasks: [],
+  taskList: [],
 };
 
 export function getInitialAppState(): IAppState

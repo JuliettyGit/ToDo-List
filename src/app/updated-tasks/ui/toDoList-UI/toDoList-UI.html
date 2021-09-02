@@ -1,0 +1,63 @@
+<div class="d-flex" cdkDropListGroup>
+  <div class="task-container toDoContainer">
+    <h2>To do</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)">
+
+      <ng-container *ngFor="let task of taskList">
+      <div class="example-box" (click)="console()"
+           *ngIf="task.taskStatus == 'To Do'" cdkDrag>
+        {{task.taskText}}
+
+        <app-delete-button></app-delete-button>
+        <app-edit-button></app-edit-button>
+      </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="task-container inProgressContainer">
+    <h2>In Progress</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)">
+
+      <ng-container *ngFor="let task of taskList">
+        <div class="example-box" (click)="console()"
+             *ngIf="task.taskStatus == 'In Progress'"
+             cdkDrag>
+          {{task.taskText}}
+
+          <app-delete-button></app-delete-button>
+          <app-edit-button></app-edit-button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="task-container finishedContainer">
+    <h2>Finished</h2>
+
+    <div
+      class="task-list"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)">
+
+      <ng-container *ngFor="let task of taskList">
+        <div class="example-box" (click)="console()"
+             *ngIf="task.taskStatus == 'Finished'"
+             cdkDrag>
+          {{task.taskText}}
+
+          <app-delete-button></app-delete-button>
+          <app-edit-button></app-edit-button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

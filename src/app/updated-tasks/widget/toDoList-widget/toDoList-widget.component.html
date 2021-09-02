@@ -1,0 +1,7 @@
+<!--Input form + ToDoList-->
+<h1>ToDo List</h1>
+<toDoCreateForm-UI (createTask)="onCreate($event)"></toDoCreateForm-UI>
+
+<div class="center">
+  <appToDoList-UI [taskList]="taskList$ | async"></appToDoList-UI>
+</div>
