@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EditModalDialogComponent } from '../edit-modal-dialog/edit-modal-dialog.component';
+import { EditModalDialogComponent } from '../../shared/modals/edit-modal-dialog/edit-modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteModalDialogComponent } from '../delete-modal-dialog/delete-modal-dialog.component';
-import { AlertModalDialogComponent } from '../alert-modal-dialog/alert-modal-dialog.component';
-import { Task } from './task';
+import { DeleteModalDialogComponent } from '../../shared/modals/delete-modal-dialog/delete-modal-dialog.component';
+import { AlertModalDialogComponent } from '../../shared/modals/alert-modal-dialog/alert-modal-dialog.component';
+import { ITaskItem } from "../../shared/interfaces/ITaskItem";
 import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { Store } from "@ngrx/store";
-import { AddNewTask } from "../../store/actions/actions";
+import {ITaskListState} from "../../shared/interfaces/ITaskListState";
 
 @Component(
   {
@@ -25,13 +24,12 @@ export class TasksComponent implements OnInit {
   status: string = '';
 
   tasks: any = {
-    toDos: new Array<Task>(),
-    inProgress: new Array<Task>(),
-    finished: new Array<Task>(),
+    tasksToDo: new Array<ITaskItem>(),
+    tasksInProgress: new Array<ITaskItem>(),
+    finishedTasks: new Array<ITaskItem>(),
   }
 
-  constructor(public dialog: MatDialog,
-              private store: Store) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -40,20 +38,20 @@ export class TasksComponent implements OnInit {
     this.status = event;
   }
 
-  addTask(newTask: Task): void
+  addTask(newTask: ITaskItem): void
   {
     switch (newTask.taskStatus)
     {
       case taskStatuses[0].status:
-        this.tasks.toDos.push(newTask);
+        this.tasks.tasksToDo.push(newTask);
         break;
 
       case taskStatuses[1].status:
-        this.tasks.inProgress.push(newTask);
+        this.tasks.tasksInProgress.push(newTask);
         break;
 
       case taskStatuses[2].status:
-        this.tasks.finished.push(newTask);
+        this.tasks.finishedTasks.push(newTask);
     }
 
     this.taskInput = '';
@@ -67,7 +65,7 @@ export class TasksComponent implements OnInit {
       this.status = taskStatuses[0].status;
     }
 
-    let newTask: Task  =
+    let newTask: ITaskItem  =
       {
         taskText: this.taskInput.trim(),
         taskStatus: this.status,
@@ -93,15 +91,20 @@ export class TasksComponent implements OnInit {
       this.addTask( newTask );
   }
 
-  filterTasks(filteredTask: Task)
+  filterTasks(filteredTask: ITaskItem)
   {
+    // let keys = Object.keys(this.tasks);
+    // for(let i = 0; i <= keys.length; i++)
+    // {
+    //   this.tasks[key][i] = this.tasks[key][i].filter((task: ITaskItem) => task !== filteredTask);
+    // }
     for (let key in this.tasks)
     {
-      this.tasks[key] = this.tasks[key].filter((task: Task) => task !== filteredTask);
+        this.tasks[key] = this.tasks[key].filter((task: ITaskItem) => task !== filteredTask);
     }
   }
 
-  openEditDialog(editingTask: Task): void
+  openEditDialog(editingTask: ITaskItem): void
   {
     const dialogRef = this.dialog.open(EditModalDialogComponent, {
       data: {
@@ -117,27 +120,27 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  editTask(editingTask: Task, result: Task): void
+  editTask(editingTask: ITaskItem, result: ITaskItem): void
   {
     this.filterTasks(editingTask);
 
     switch (result.taskStatus)
     {
       case taskStatuses[0].status:
-        this.tasks.toDos.push(result);
+        this.tasks.tasksToDo.push(result);
         break;
 
       case taskStatuses[1].status:
-        this.tasks.inProgress.push(result);
+        this.tasks.tasksInProgress.push(result);
         break;
 
       case taskStatuses[2].status:
-        this.tasks.finished.push(result);
+        this.tasks.finishedTasks.push(result);
         break;
     }
   }
 
-  openDeleteDialog(taskToDelete: Task): void
+  openDeleteDialog(taskToDelete: ITaskItem): void
   {
     const dialogRef = this.dialog.open(DeleteModalDialogComponent, {
       data: {
@@ -155,7 +158,7 @@ export class TasksComponent implements OnInit {
       .subscribe(() => this.deleteTask(taskToDelete));
   }
 
-  deleteTask(taskToDelete: Task): void
+  deleteTask(taskToDelete: ITaskItem): void
   {
     this.filterTasks(taskToDelete);
   }
@@ -169,7 +172,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<Task[]>): void
+  drop(event: CdkDragDrop<ITaskItem[]>): void
   {
     if (event.previousContainer === event.container)
     {

@@ -16,7 +16,7 @@ export class AddNewTask implements Action {
 
 export class EditTask implements Action {
   public readonly type = EUserActions.EditTask;
-  constructor(public payload: ITaskItem)
+  constructor(public payload: ITaskItem[])
   {}
 }
 
@@ -26,4 +26,10 @@ export class DeleteTask implements Action {
   {}
 }
 
-export type UserActions = AddNewTask | EditTask | DeleteTask;
+export class preDeleteTask implements Action {
+  public readonly type = EUserActions.DeleteTask;
+  constructor(public payload: ITaskItem)
+  {}
+}
+
+export type UserActions = AddNewTask | EditTask | DeleteTask | preDeleteTask;

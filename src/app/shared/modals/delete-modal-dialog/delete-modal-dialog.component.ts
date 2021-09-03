@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Task } from "../tasks/task";
+import { ITaskItem } from "../../interfaces/ITaskItem";
 
 @Component({
   selector: 'app-delete-modal-dialog',
@@ -10,7 +10,7 @@ import { Task } from "../tasks/task";
 export class DeleteModalDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DeleteModalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Task) { }
+              @Inject(MAT_DIALOG_DATA) public data: ITaskItem) { }
 
   ngOnInit(): void {
   }

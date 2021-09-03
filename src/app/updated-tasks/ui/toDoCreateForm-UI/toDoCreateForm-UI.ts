@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ITaskItem } from "../../../shared/interfaces/ITaskItem";
 import { taskStatuses } from "../../../shared/constants/taskStatuses";
+import {AddNewTask} from "../../../store/actions/actions";
+import {Store} from "@ngrx/store";
+import {IAppState} from "../../../shared/interfaces/IAppState";
 
 
 @Component({
@@ -17,7 +20,7 @@ export class ToDoCreateFormUI implements OnInit {
   @Output()
   createTask = new EventEmitter<ITaskItem>()
 
-  constructor() { }
+  constructor(private store$: Store<IAppState>) { }
 
   ngOnInit(): void {}
 
@@ -80,6 +83,6 @@ export class ToDoCreateFormUI implements OnInit {
 
   emitTask(taskItem: ITaskItem)
   {
-    this.createTask.emit(taskItem);
+    this.store$.dispatch(new AddNewTask(taskItem));
   }
 }

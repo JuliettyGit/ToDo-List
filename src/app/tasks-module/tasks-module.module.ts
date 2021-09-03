@@ -8,21 +8,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from "@angular/forms";
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { EditModalDialogComponent} from './edit-modal-dialog/edit-modal-dialog.component';
-import { DeleteModalDialogComponent } from './delete-modal-dialog/delete-modal-dialog.component';
-import { AlertModalDialogComponent } from './alert-modal-dialog/alert-modal-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from "@angular/router";
 import { taskTrackerRoutes } from "../shared/constants/routes/tasksTrackerRoutes";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
     TasksComponent,
-    EditModalDialogComponent,
-    DeleteModalDialogComponent,
-    AlertModalDialogComponent,
   ],
   exports: [
     TasksComponent,
@@ -40,7 +34,7 @@ import { taskTrackerRoutes } from "../shared/constants/routes/tasksTrackerRoutes
     MatDialogModule,
     FormsModule,
     SharedModule,
-    DragDropModule
+    DragDropModule,
   ]
 })
 export class TasksModuleModule { }

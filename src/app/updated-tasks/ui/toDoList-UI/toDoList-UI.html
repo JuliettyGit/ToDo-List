@@ -7,13 +7,13 @@
       cdkDropList
       (cdkDropListDropped)="drop($event)">
 
-      <ng-container *ngFor="let task of taskList">
-      <div class="example-box" (click)="console()"
-           *ngIf="task.taskStatus == 'To Do'" cdkDrag>
+      <ng-container *ngFor="let task of tasksToDo">
+      <div class="example-box"
+           cdkDrag>
         {{task.taskText}}
 
-        <app-delete-button></app-delete-button>
-        <app-edit-button></app-edit-button>
+        <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
+        <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
       </div>
       </ng-container>
     </div>
@@ -27,14 +27,13 @@
       cdkDropList
       (cdkDropListDropped)="drop($event)">
 
-      <ng-container *ngFor="let task of taskList">
-        <div class="example-box" (click)="console()"
-             *ngIf="task.taskStatus == 'In Progress'"
+      <ng-container *ngFor="let task of tasksInProgress">
+        <div class="example-box"
              cdkDrag>
           {{task.taskText}}
 
-          <app-delete-button></app-delete-button>
-          <app-edit-button></app-edit-button>
+          <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
+          <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
         </div>
       </ng-container>
     </div>
@@ -42,20 +41,19 @@
 
   <div class="task-container finishedContainer">
     <h2>Finished</h2>
-
+<!--Выводит не свое значение-->
     <div
       class="task-list"
       cdkDropList
       (cdkDropListDropped)="drop($event)">
 
-      <ng-container *ngFor="let task of taskList">
-        <div class="example-box" (click)="console()"
-             *ngIf="task.taskStatus == 'Finished'"
+      <ng-container *ngFor="let task of finishedTasks">
+        <div class="example-box"
              cdkDrag>
           {{task.taskText}}
 
-          <app-delete-button></app-delete-button>
-          <app-edit-button></app-edit-button>
+          <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
+          <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
         </div>
       </ng-container>
     </div>

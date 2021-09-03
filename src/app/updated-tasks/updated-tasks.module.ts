@@ -17,7 +17,7 @@ import { FormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ToDoListUI } from './ui/toDoList-UI/toDoList-UI';
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import { DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
