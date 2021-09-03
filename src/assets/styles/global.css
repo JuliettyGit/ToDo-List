@@ -1,0 +1,132 @@
+.inputForm {
+  min-width: 150px;
+  margin-top: 1em;
+}
+
+.inputForm > h1{
+  margin-bottom: 1em;
+  color: var(--header);
+}
+
+.taskNameInput {
+  width: 70%;
+  line-height: 1.5em;
+  height: 4.1em;
+  margin-right: 1em;
+}
+
+.center{
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+mat-selection-list{
+  margin-top: 1.5em;
+}
+
+button{
+  float: right;
+  width: 15em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.task-container{
+  background: #e0e0e0;
+  box-shadow:  5px 5px 9px #cacaca,
+  -5px -5px 9px #f6f6f6;
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-top: 1.5em;
+  width: 100%;
+  margin-right: 1em;
+}
+
+.task-container:last-child{
+  margin-right: 0;
+}
+
+.task-container > h2{
+  margin-bottom: 0;
+  color: #f8f9fa;
+}
+
+.toDoContainer{
+  background-color: var(--yelow);
+}
+
+.inProgressContainer{
+  background-color: var(--blue);
+}
+
+.finishedContainer{
+  background-color: var(--green);
+}
+
+.task-list {
+  min-height: 45px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.example-box {
+  line-height: 1.5em;
+  padding: 10px 5px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  line-height: 1.5em;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.task-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.d-flex{
+  display: flex;
+}
+
+app-edit-button, app-delete-button{
+  cursor: pointer;
+  float: right;
+}
+
+.btnPrimary{
+  background-color: #802BB1;
+  color: white;
+}
+
+app-option-list{
+  margin-right: 1em;
+}
+

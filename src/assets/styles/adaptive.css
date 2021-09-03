@@ -1,0 +1,27 @@
+@media screen and (max-width: 630px) {
+  .d-flex
+  {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .d-flex > mat-form-field {
+    margin-bottom: 0.7em;
+  }
+
+  .d-flex > button {
+    margin-top: 0.7em;
+  }
+
+  .taskNameInput{
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  app-option-list{
+    width: 100%;
+  }
+}

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ITaskItem } from "../../../shared/interfaces/ITaskItem";
 import { taskStatuses } from "../../../shared/constants/taskStatuses";
-import {AddNewTask} from "../../../store/actions/actions";
-import {Store} from "@ngrx/store";
-import {IAppState} from "../../../shared/interfaces/IAppState";
+import { AddNewTask } from "../../../store/actions/actions";
+import { Store } from "@ngrx/store";
+import { IAppState } from "../../../shared/interfaces/IAppState";
 
 
 @Component({
