@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit {
   taskInput: string = '';
   status: string = '';
 
-  tasks: any = {
+  tasks: ITaskListState = {
     tasksToDo: new Array<ITaskItem>(),
     tasksInProgress: new Array<ITaskItem>(),
     finishedTasks: new Array<ITaskItem>(),
@@ -54,6 +54,7 @@ export class TasksComponent implements OnInit {
         this.tasks.finishedTasks.push(newTask);
     }
 
+
     this.taskInput = '';
     this.status = taskStatuses[0].status;
   }
@@ -83,26 +84,33 @@ export class TasksComponent implements OnInit {
     else if(newTasksArr.some(task => task.taskText == newTask.taskText))
     {
       const alertText = "This task has already created";
-      this.openAlertDialog( alertText );
+      this.openAlertDialog(alertText);
       this.taskInput = '';
     }
 
     else
-      this.addTask( newTask );
+      this.addTask(newTask);
   }
 
   filterTasks(filteredTask: ITaskItem)
   {
-    // let keys = Object.keys(this.tasks);
-    // for(let i = 0; i <= keys.length; i++)
-    // {
-    //   this.tasks[key][i] = this.tasks[key][i].filter((task: ITaskItem) => task !== filteredTask);
-    // }
-    for (let key in this.tasks)
+    let key: keyof ITaskListState;
+    for (key in this.tasks)
     {
-        this.tasks[key] = this.tasks[key].filter((task: ITaskItem) => task !== filteredTask);
+      this.tasks[key] = this.tasks[key].filter((task: ITaskItem) => task !== filteredTask);
     }
   }
+
+  /*
+  filterTasks(filteredTask: ITaskItem) {
+  const keys = Object.keys(this.tasks) as Array<keyof ITaskListState>;
+
+  for (let i = 0; i < keys.length; ++i) {
+    const key = keys[i];
+    this.tasks[key] = this.tasks[key].filter((task: ITaskItem) => task !== filteredTask);
+    console.log(key);
+  }
+}*/
 
   openEditDialog(editingTask: ITaskItem): void
   {

@@ -33,6 +33,7 @@ button{
   letter-spacing: 0.1em;
   padding-left: 1em;
   padding-right: 1em;
+  height: 4.1em;
 }
 
 .task-container{
@@ -114,6 +115,7 @@ button{
 
 .d-flex{
   display: flex;
+  align-items: flex-start;
 }
 
 app-edit-button, app-delete-button{
