@@ -7,7 +7,7 @@ import { ITaskItem } from "../../shared/interfaces/ITaskItem";
 import { filter } from 'rxjs/operators';
 import { taskStatuses } from 'src/app/shared/constants/taskStatuses'
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import {ITaskListState} from "../../shared/interfaces/ITaskListState";
+import { ITaskListState } from "../../shared/interfaces/ITaskListState";
 
 @Component(
   {

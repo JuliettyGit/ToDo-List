@@ -1,10 +1,11 @@
 import { EUserActions, UserActions } from "../actions/actions";
 import { initialAppState } from "../state/app.state";
+import { IAppState } from "../../shared/interfaces/IAppState";
 
-export const TODO_REDUCER_NODE = 'toDo';
+export const TODO_REDUCER_NODE = 'toDoList';
 
 export const appReducer =
-  (state = initialAppState, action: UserActions) =>
+  (state: IAppState = initialAppState, action: UserActions) =>
 {
   switch (action.type)
   {
@@ -18,16 +19,28 @@ export const appReducer =
     case EUserActions.DeleteTask:
       return {
         ...state,
-        taskList: state.taskList.filter(task => task.taskText !== action.payload.taskText),
+        taskList: state.taskList.filter(task => task.taskId !== action.payload.taskId),
       }
 
     case EUserActions.EditTask:
       return {
         ...state,
-        taskList: state.taskList.map(task => task.taskText === action.payload[0].taskText && task.taskStatus === action.payload[0].taskStatus ?
+        taskList: state.taskList.map(task => task.taskId === action.payload[0].taskId ?
           {
             taskText: action.payload[1].taskText,
-            taskStatus: action.payload[1].taskStatus
+            taskStatus: action.payload[1].taskStatus,
+            taskId: task.taskId
+          } : task)
+      }
+
+    case EUserActions.DragNDrop:
+      return {
+        ...state,
+        taskList: state.taskList.map(task => task.taskId === action.payload[0].taskId ?
+          {
+            taskText: task.taskText,
+            taskStatus: action.payload[1],
+            taskId: task.taskId
           } : task)
       }
 

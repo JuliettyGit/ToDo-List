@@ -32,7 +32,7 @@ export class EditModalDialogComponent implements OnInit
   {
     if(this.data.taskText !== '')
     {
-      this.dialogRef.close( { taskText: this.data.taskText, taskStatus: this.data.taskStatus });
+      this.dialogRef.close( { taskText: this.data.taskText, taskStatus: this.data.taskStatus, });
     }
 
     else

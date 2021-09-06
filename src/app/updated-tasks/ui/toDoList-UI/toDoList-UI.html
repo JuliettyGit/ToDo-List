@@ -6,17 +6,17 @@
     <div
       class="task-list"
       cdkDropList
-      (cdkDropListDropped)="drop($event)">
+      [cdkDropListData]="tasksToDo"
+      (cdkDropListDropped)="drop($event, 'To Do')">
 
-      <ng-container *ngFor="let task of tasksToDo">
-        <div class="example-box"
+        <div *ngFor="let task of tasksToDo"
+             class="example-box"
              cdkDrag>
           {{task.taskText}}
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
         </div>
-      </ng-container>
     </div>
   </div>
 
@@ -26,17 +26,17 @@
     <div
       class="task-list"
       cdkDropList
-      (cdkDropListDropped)="drop($event)">
+      [cdkDropListData]="tasksInProgress"
+      (cdkDropListDropped)="drop($event, 'In Progress')">
 
-      <ng-container *ngFor="let task of tasksInProgress">
-        <div class="example-box"
+        <div *ngFor="let task of tasksInProgress"
+             class="example-box"
              cdkDrag>
           {{task.taskText}}
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
         </div>
-      </ng-container>
     </div>
   </div>
 
@@ -45,17 +45,17 @@
     <div
       class="task-list"
       cdkDropList
-      (cdkDropListDropped)="drop($event)">
+      [cdkDropListData]="finishedTasks"
+      (cdkDropListDropped)="drop($event, 'Finished')">
 
-      <ng-container *ngFor="let task of finishedTasks">
-        <div class="example-box"
+        <div *ngFor="let task of finishedTasks"
+             class="example-box"
              cdkDrag>
           {{task.taskText}}
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
         </div>
-      </ng-container>
     </div>
   </div>
 </div>

@@ -6,8 +6,8 @@ export enum EUserActions {
   AddNewTask = '[Task List] Add task to the task list',
   EditTask = '[Task List] Edit task',
   DeleteTask = '[Task List] Delete task from task list',
+  DragNDrop = '[Drag and Drop] Change task status'
 }
-
 
 export class AddNewTask implements Action {
   public readonly type = EUserActions.AddNewTask;
@@ -26,10 +26,10 @@ export class DeleteTask implements Action {
   {}
 }
 
-export class preDeleteTask implements Action {
-  public readonly type = EUserActions.DeleteTask;
-  constructor(public payload: ITaskItem)
+export class DragNDrop implements Action {
+  public readonly type = EUserActions.DragNDrop;
+  constructor(public payload: [ITaskItem, string])
   {}
 }
 
-export type UserActions = AddNewTask | EditTask | DeleteTask | preDeleteTask;
+export type UserActions = AddNewTask | EditTask | DeleteTask | DragNDrop ;

@@ -1,6 +1,6 @@
 <!--Input form + ToDoList-->
 <h1>ToDo List</h1>
-<toDoCreateForm-UI></toDoCreateForm-UI>
+<toDoCreateForm-UI [taskList]="taskList$ | async"></toDoCreateForm-UI>
 <appToDoList-UI [taskList]="taskList$ | async"
   [tasksToDo]="tasksToDo$ | async"
   [tasksInProgress]="tasksInProgress$ | async"

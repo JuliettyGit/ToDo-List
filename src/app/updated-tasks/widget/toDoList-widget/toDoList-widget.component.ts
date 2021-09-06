@@ -22,6 +22,9 @@ export class ToDoListWidgetComponent implements OnInit {
   constructor(private store$: Store<IAppState>) { }
 
   ngOnInit(): void {
+    if(this.taskList$ == null)
+    {
+      console.log('123')
+    }
   }
-
 }
