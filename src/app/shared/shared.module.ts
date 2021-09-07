@@ -14,7 +14,9 @@ import { EditModalDialogComponent } from "./modals/edit-modal-dialog/edit-modal-
 import { DeleteModalDialogComponent } from "./modals/delete-modal-dialog/delete-modal-dialog.component";
 import { AlertModalDialogComponent } from "./modals/alert-modal-dialog/alert-modal-dialog.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import {MatButtonModule} from "@angular/material/button";
+import { MatButtonModule } from "@angular/material/button";
+import { DetailsInfoButtonComponent } from './buttons/details-info-button/details-info-button.component';
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import {MatButtonModule} from "@angular/material/button";
     EditModalDialogComponent,
     DeleteModalDialogComponent,
     AlertModalDialogComponent,
+    DetailsInfoButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -35,13 +38,15 @@ import {MatButtonModule} from "@angular/material/button";
     FormsModule,
     MatIconModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
 
   ],
   exports: [
     OptionListComponent,
     DeleteButtonComponent,
-    EditButtonComponent
+    EditButtonComponent,
+    DetailsInfoButtonComponent
   ]
 })
 export class SharedModule { }

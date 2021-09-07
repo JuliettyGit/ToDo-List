@@ -1,20 +1,46 @@
 <div class="inputForm center">
   <div class="d-flex">
     <mat-form-field class="taskNameInput"
-                    appearance="fill"
-                    autocomplete="off">
+                    appearance="fill">
       <mat-label>Tasks</mat-label>
       <input autocomplete="off"
              matInput
              [(ngModel)]="taskName"
              (keydown.enter)="checkUserInput()">
+
+      <mat-icon class="addMoreInfoBtn"
+                matSuffix
+                matTooltip="Add more info"
+                (click)="toggleForm()">expand_more</mat-icon>
     </mat-form-field>
 
     <app-option-list (change)="writeStatus($event)"></app-option-list>
 
     <button id="addBtn" mat-flat-button
-            class="btnPrimary"
+            class="btnPrimary button"
             (click)="checkUserInput()"
             [disabled]="!taskName" >Add Task</button>
   </div>
 </div>
+
+<div class="detailsInput center d-flex"
+     *ngIf="addDetails">
+
+  <mat-form-field class="taskDetailsInput"
+                  appearance="fill">
+
+    <mat-label>Task details</mat-label>
+
+    <textarea autocomplete="off"
+              matInput
+              [(ngModel)]="taskDetails">
+    </textarea>
+
+  </mat-form-field>
+
+  <button mat-flat-button
+          color="warn"
+          class="button"
+          (click)="toggleForm()">Cancel</button>
+</div>
+

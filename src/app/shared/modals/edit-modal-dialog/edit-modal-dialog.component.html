@@ -1,11 +1,19 @@
 <h1 mat-dialog-title>Change your task</h1>
+<mat-label>Task: </mat-label>
 <textarea matInput
           cdkTextareaAutosize
           cdkAutosizeMinRows="1"
           cdkAutosizeMaxRows="5"
           [(ngModel)]="data.taskText">
-
 </textarea>
+
+<mat-label>Task details: </mat-label>
+<textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          [(ngModel)]="data.taskDetails">
+  </textarea>
 
 <app-option-list (change)="writeStatus($event)"></app-option-list>
 

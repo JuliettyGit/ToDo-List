@@ -1,7 +1,9 @@
 <div class="center">
 <div class="d-flex" cdkDropListGroup>
   <div class="task-container toDoContainer">
-    <h2>To do</h2>
+    <h2 [matBadgeHidden]="tasksToDo.length === 0"
+        [matBadge]="tasksToDo.length"
+        matBadgeColor="accent">To do</h2>
 
     <div
       class="task-list"
@@ -16,12 +18,15 @@
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
+          <app-details-info-button (click)="openAlertDialog(task.taskText, task.taskDetails, task.taskStatus)" ></app-details-info-button>
         </div>
     </div>
   </div>
 
   <div class="task-container inProgressContainer">
-    <h2>In Progress</h2>
+    <h2 [matBadge]="tasksInProgress.length"
+        [matBadgeHidden]="tasksInProgress.length === 0"
+        matBadgeColor="accent">In Progress</h2>
 
     <div
       class="task-list"
@@ -36,12 +41,15 @@
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
+          <app-details-info-button (click)="openAlertDialog(task.taskText, task.taskDetails, task.taskStatus)" ></app-details-info-button>
         </div>
     </div>
   </div>
 
-  <div class="task-container finishedContainer">
-    <h2>Finished</h2>
+ <div class="task-container finishedContainer">
+   <h2 [matBadge]="finishedTasks.length"
+       [matBadgeHidden]="finishedTasks.length === 0"
+       matBadgeColor="accent">Finished</h2>
     <div
       class="task-list"
       cdkDropList
@@ -55,6 +63,7 @@
 
           <app-delete-button (click)="openDeleteDialog(task)"></app-delete-button>
           <app-edit-button (click)="openEditDialog(task)"></app-edit-button>
+          <app-details-info-button (click)="openAlertDialog(task.taskText, task.taskDetails, task.taskStatus)" ></app-details-info-button>
         </div>
     </div>
   </div>

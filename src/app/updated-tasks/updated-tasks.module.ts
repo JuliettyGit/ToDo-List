@@ -13,11 +13,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ToDoListUI } from './ui/toDoList-UI/toDoList-UI';
-import { DragDropModule} from "@angular/cdk/drag-drop";
+import { DragDropModule}  from "@angular/cdk/drag-drop";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,11 @@ import { DragDropModule} from "@angular/cdk/drag-drop";
     MatDialogModule,
     FormsModule,
     SharedModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule,
+    MatBadgeModule,
+    MatDatepickerModule,
+    ReactiveFormsModule
   ],
 })
 

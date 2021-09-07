@@ -29,7 +29,8 @@ export const appReducer =
           {
             taskText: action.payload[1].taskText,
             taskStatus: action.payload[1].taskStatus,
-            taskId: task.taskId
+            taskId: task.taskId,
+            taskDetails: action.payload[1].taskDetails
           } : task)
       }
 
@@ -40,7 +41,8 @@ export const appReducer =
           {
             taskText: task.taskText,
             taskStatus: action.payload[1],
-            taskId: task.taskId
+            taskId: task.taskId,
+            taskDetails: task.taskDetails
           } : task)
       }
 

@@ -11,14 +11,14 @@ import { DialogData } from '../../interfaces/dialogDataInterface';
 export class AlertModalDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AlertModalDialogComponent>,
-  @Inject(MAT_DIALOG_DATA) public data: DialogData)
+              @Inject(MAT_DIALOG_DATA)
+              public data: DialogData)
   { }
 
   ngOnInit(): void {
   }
 
   close(): void {
-    this.dialogRef.close();
-  }
+    this.dialogRef.close();}
 
 }

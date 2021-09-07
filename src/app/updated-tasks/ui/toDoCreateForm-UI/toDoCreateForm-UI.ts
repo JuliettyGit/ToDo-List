@@ -7,11 +7,10 @@ import { IAppState } from "../../../shared/interfaces/IAppState";
 import { MatDialog } from "@angular/material/dialog";
 import { AlertModalDialogComponent } from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
 
-
 @Component({
   selector: 'toDoCreateForm-UI',
   templateUrl: './toDoCreateForm-UI.html',
-  styleUrls: ['./toDoCreateForm-UI.css']
+  styleUrls: ['./toDoCreateForm-UI.css'],
 })
 export class ToDoCreateFormUI implements OnInit {
 
@@ -20,11 +19,19 @@ export class ToDoCreateFormUI implements OnInit {
 
   taskName:string = '';
   taskStatus: string = '';
+  taskDetails: string = '';
+  addDetails!: boolean;
 
   constructor(private store$: Store<IAppState>,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {}
+
+  toggleForm()
+  {
+    this.addDetails = !this.addDetails;
+    this.taskDetails = '';
+  }
 
   writeStatus(event: string): void
   {
@@ -42,6 +49,7 @@ export class ToDoCreateFormUI implements OnInit {
       taskText: this.taskName.trim(),
       taskStatus: this.taskStatus,
       taskId: this.generateId(),
+      taskDetails: this.taskDetails,
     };
 
     if(!newTaskItem.taskText)
@@ -82,7 +90,7 @@ export class ToDoCreateFormUI implements OnInit {
   {
     this.dialog.open(AlertModalDialogComponent, {
       data: {
-        alertText: alertText
+        alertText: alertText,
       }
     });
   }
@@ -96,5 +104,6 @@ export class ToDoCreateFormUI implements OnInit {
   {
     this.taskName = '';
     this.taskStatus = '';
+    this.taskDetails =''
   }
 }

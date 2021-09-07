@@ -3,6 +3,11 @@
   margin-top: 1em;
 }
 
+.detailsInput{
+  margin-top: 1em;
+  width: 100%;
+}
+
 .inputForm > h1{
   margin-bottom: 1em;
   color: var(--header);
@@ -13,6 +18,12 @@
   line-height: 1.5em;
   height: 4.1em;
   margin-right: 1em;
+}
+
+.taskDetailsInput{
+  width: 85%;
+  margin-right: 1em;
+  height: 3.8em;
 }
 
 .center{
@@ -26,7 +37,7 @@ mat-selection-list{
   margin-top: 1.5em;
 }
 
-button{
+.button{
   float: right;
   width: 15em;
   font-weight: 500;
@@ -57,7 +68,7 @@ button{
 }
 
 .toDoContainer{
-  background-color: var(--yelow);
+  background-color: var(--yellow);
 }
 
 .inProgressContainer{
@@ -118,17 +129,25 @@ button{
   align-items: flex-start;
 }
 
-app-edit-button, app-delete-button{
+app-edit-button,
+app-delete-button,
+app-details-info-button{
   cursor: pointer;
   float: right;
 }
 
 .btnPrimary{
-  background-color: #802BB1;
+  background-color: var(--purple);
   color: white;
 }
 
 app-option-list{
   margin-right: 1em;
 }
+
+.addMoreInfoBtn {
+  cursor: pointer;
+  color: var(--purple);
+}
+
 

@@ -8,6 +8,7 @@ import { EditModalDialogComponent } from "../../../shared/modals/edit-modal-dial
 import {DeleteTask, DragNDrop, EditTask} from "../../../store/actions/actions";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../shared/interfaces/IAppState";
+import {AlertModalDialogComponent} from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
 
 @Component({
   selector: 'appToDoList-UI',
@@ -57,6 +58,7 @@ export class ToDoListUI implements OnInit {
       data: {
         taskText: editingTask.taskText,
         taskStatus: editingTask.taskStatus,
+        taskDetails: editingTask.taskDetails
       }
     });
 
@@ -64,6 +66,18 @@ export class ToDoListUI implements OnInit {
       .pipe(filter(res => !!editingTask && res))
       .subscribe(result  => this.store$.dispatch(new EditTask([editingTask, result])))
   }
+
+  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string): void
+  {
+    this.dialog.open(AlertModalDialogComponent, {
+      data: {
+        alertText: taskText,
+        description: taskDetails,
+        taskStatus: taskStatus
+      }
+    });
+  }
+
 
   drop(event: CdkDragDrop<ITaskItem[]>, newTaskStatus: string): void
   {
