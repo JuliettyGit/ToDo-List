@@ -45,15 +45,16 @@
 
     <mat-form-field class="deadlineDate"
                     appearance="fill">
-      <mat-label>Choose deadline day</mat-label>
-      <input matInput
-             [matDatepickerFilter]="myFilter"
+      <mat-label>Deadline</mat-label>
+      <input autocomplete="off"
+             matInput [min]="minDate"
+             [max]="maxDate"
              [matDatepicker]="$any(picker)"
-             autocomplete="off">
+             [(ngModel)]="deadline">
       <mat-datepicker-toggle matSuffix
                              [for]="picker">
       </mat-datepicker-toggle>
-      <mat-datepicker #picker [(ngModel)]="deadline"></mat-datepicker>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <button mat-flat-button

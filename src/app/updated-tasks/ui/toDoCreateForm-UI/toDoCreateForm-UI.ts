@@ -21,18 +21,16 @@ export class ToDoCreateFormUI implements OnInit {
   taskStatus: string = '';
   taskDetails: string = '';
   addDetails!: boolean;
-  deadline!: number;
+  deadline!: Date;
+  currentYear = new Date().getFullYear();
+  minDate: Date = new Date(this.currentYear, 0, 1);
+  maxDate: Date = new Date(this.currentYear + 1, 11, 31);
+
 
   constructor(private store$: Store<IAppState>,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {}
-
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  }
 
   toggleForm()
   {
@@ -57,7 +55,7 @@ export class ToDoCreateFormUI implements OnInit {
       taskStatus: this.taskStatus,
       taskId: this.generateId(),
       taskDetails: this.taskDetails,
-      deadline: this.deadline,
+      deadline: this.deadline.toDateString(),
     };
 
     if(!newTaskItem.taskText)
