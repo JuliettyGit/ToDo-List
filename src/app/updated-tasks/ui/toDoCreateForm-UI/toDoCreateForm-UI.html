@@ -5,6 +5,7 @@
       <mat-label>Tasks</mat-label>
       <input autocomplete="off"
              matInput
+             name="taskName"
              [(ngModel)]="taskName"
              (keydown.enter)="checkUserInput()">
 
@@ -23,24 +24,28 @@
   </div>
 </div>
 
-<div class="detailsInput center d-flex"
+<div class="inputForm center"
      *ngIf="addDetails">
+  <div class="d-flex">
 
-  <mat-form-field class="taskDetailsInput"
-                  appearance="fill">
 
-    <mat-label>Task details</mat-label>
+    <mat-form-field class="taskNameInput"
+                    appearance="fill">
 
-    <textarea autocomplete="off"
-              matInput
-              [(ngModel)]="taskDetails">
-    </textarea>
+      <mat-label>Task details</mat-label>
 
-  </mat-form-field>
+      <textarea autocomplete="off"
+                matInput
+                name="taskDetails"
+                [(ngModel)]="taskDetails">
+      </textarea>
 
-  <button mat-flat-button
-          color="warn"
-          class="button"
-          (click)="toggleForm()">Cancel</button>
+      <!--TODO: add deadline-->
+    </mat-form-field>
+
+    <button mat-flat-button
+            color="warn"
+            class="button"
+            (click)="toggleForm()">Cancel</button>
+  </div>
 </div>
-

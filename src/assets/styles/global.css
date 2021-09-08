@@ -3,11 +3,6 @@
   margin-top: 1em;
 }
 
-.detailsInput{
-  margin-top: 1em;
-  width: 100%;
-}
-
 .inputForm > h1{
   margin-bottom: 1em;
   color: var(--header);
@@ -16,14 +11,16 @@
 .taskNameInput {
   width: 70%;
   line-height: 1.5em;
-  height: 4.1em;
+  height: 5em;
   margin-right: 1em;
 }
 
-.taskDetailsInput{
-  width: 85%;
+.deadlineDate{
   margin-right: 1em;
-  height: 3.8em;
+  min-width: 150px;
+  width: 15%;
+  line-height: 1.5em;
+  height: 4.1em;
 }
 
 .center{

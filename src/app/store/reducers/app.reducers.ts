@@ -30,7 +30,8 @@ export const appReducer =
             taskText: action.payload[1].taskText,
             taskStatus: action.payload[1].taskStatus,
             taskId: task.taskId,
-            taskDetails: action.payload[1].taskDetails
+            taskDetails: action.payload[1].taskDetails,
+            deadline: action.payload[1].deadline
           } : task)
       }
 
@@ -42,7 +43,8 @@ export const appReducer =
             taskText: task.taskText,
             taskStatus: action.payload[1],
             taskId: task.taskId,
-            taskDetails: task.taskDetails
+            taskDetails: task.taskDetails,
+            deadline: task.deadline
           } : task)
       }
 
