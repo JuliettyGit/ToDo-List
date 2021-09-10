@@ -67,7 +67,7 @@ export class ToDoListUI implements OnInit {
       .subscribe(result  => this.store$.dispatch(new EditTask([editingTask, result])))
   }
 
-  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string, deadline: string): void
+  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string, deadline: Date): void
   {
     this.dialog.open(AlertModalDialogComponent, {
       data: {

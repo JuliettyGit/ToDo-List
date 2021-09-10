@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{data.alertText}}</h1>
-<div><b>Task details: </b>{{data.description}}</div>
-<div><b>Task status: </b>{{data.taskStatus}}</div>
-<div><b>Task deadline: </b>{{data.deadline}}</div>
+<div *ngIf="data.description !== ''"><b>Task details: </b>{{data.description}}</div>
+<div *ngIf="data.taskStatus !== ''"><b>Task status: </b>{{data.taskStatus}}</div>
+<div *ngIf="data.deadline !== undefined"><b>Task deadline: </b>{{data.deadline}}</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close
           (click)="close()"

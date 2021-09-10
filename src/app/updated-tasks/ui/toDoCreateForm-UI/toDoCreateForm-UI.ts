@@ -55,7 +55,7 @@ export class ToDoCreateFormUI implements OnInit {
       taskStatus: this.taskStatus,
       taskId: this.generateId(),
       taskDetails: this.taskDetails,
-      deadline: this.deadline.toDateString(),
+      deadline: this.deadline,
     };
 
     if(!newTaskItem.taskText)

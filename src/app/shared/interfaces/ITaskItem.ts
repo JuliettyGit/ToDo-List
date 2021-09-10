@@ -3,5 +3,5 @@ export interface ITaskItem {
   taskStatus: string;
   taskId?: number;
   taskDetails?: string;
-  deadline?: string;
+  deadline?: Date;
 }
