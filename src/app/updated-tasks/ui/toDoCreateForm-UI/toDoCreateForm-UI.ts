@@ -22,8 +22,10 @@ export class ToDoCreateFormUI implements OnInit {
   taskName:string = '';
   taskStatus: string = '';
   taskDetails: string = '';
-  addDetails!: boolean;
   deadline!: Date;
+
+  addDetails!: boolean;
+
   currentYear = new Date().getFullYear();
   minDate: Date = new Date(this.currentYear, 0, 1);
   maxDate: Date = new Date(this.currentYear + 1, 11, 31);
