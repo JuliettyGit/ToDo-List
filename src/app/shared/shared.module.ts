@@ -17,6 +17,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatButtonModule } from "@angular/material/button";
 import { DetailsInfoButtonComponent } from './buttons/details-info-button/details-info-button.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     DeleteModalDialogComponent,
     AlertModalDialogComponent,
     DetailsInfoButtonComponent,
+    DatePickerComponent,
   ],
   imports: [
     CommonModule,
@@ -39,14 +42,15 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatIconModule,
     MatDialogModule,
     DragDropModule,
-    MatTooltipModule
-
+    MatTooltipModule,
+    MatDatepickerModule
   ],
   exports: [
     OptionListComponent,
     DeleteButtonComponent,
     EditButtonComponent,
-    DetailsInfoButtonComponent
+    DetailsInfoButtonComponent,
+    DatePickerComponent
   ]
 })
 export class SharedModule { }

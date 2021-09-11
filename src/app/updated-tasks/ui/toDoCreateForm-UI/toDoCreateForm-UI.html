@@ -28,8 +28,7 @@
      *ngIf="addDetails">
   <div class="d-flex">
 
-
-    <mat-form-field class="taskNameInput"
+    <mat-form-field class="taskDetailsInput"
                     appearance="fill">
 
       <mat-label>Task details</mat-label>
@@ -39,22 +38,9 @@
                 name="taskDetails"
                 [(ngModel)]="taskDetails">
       </textarea>
-
     </mat-form-field>
 
-    <mat-form-field class="deadlineDate"
-                    appearance="fill">
-      <mat-label>Deadline</mat-label>
-      <input autocomplete="off"
-             matInput [min]="minDate"
-             [max]="maxDate"
-             [matDatepicker]="$any(picker)"
-             [(ngModel)]="deadline">
-      <mat-datepicker-toggle matSuffix
-                             [for]="picker">
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <app-date-picker (change)="getDeadline($event)"></app-date-picker>
 
     <button mat-flat-button
             color="warn"

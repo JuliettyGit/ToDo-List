@@ -59,6 +59,7 @@ export class ToDoListUI implements OnInit {
         taskText: editingTask.taskText,
         taskStatus: editingTask.taskStatus,
         taskDetails: editingTask.taskDetails,
+        deadline: editingTask.deadline
       }
     });
 
@@ -67,7 +68,7 @@ export class ToDoListUI implements OnInit {
       .subscribe(result  => this.store$.dispatch(new EditTask([editingTask, result])))
   }
 
-  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string, deadline: Date): void
+  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string, deadline: Date | undefined): void
   {
     this.dialog.open(AlertModalDialogComponent, {
       data: {
@@ -94,8 +95,6 @@ export class ToDoListUI implements OnInit {
         event.previousIndex,
         event.currentIndex);
       let data = event.container.data[0];
-      console.log(data);
-      console.log(newTaskStatus)
       this.store$.dispatch(new DragNDrop([data, newTaskStatus]))
     }
   }

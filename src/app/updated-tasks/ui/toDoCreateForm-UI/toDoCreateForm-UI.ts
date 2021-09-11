@@ -22,17 +22,9 @@ export class ToDoCreateFormUI implements OnInit {
   taskName:string = '';
   taskStatus: string = '';
   taskDetails: string = '';
-  deadline!: Date;
+  deadline!: Date | undefined;
 
   addDetails!: boolean;
-
-  currentYear = new Date().getFullYear();
-  minDate: Date = new Date(this.currentYear, 0, 1);
-  maxDate: Date = new Date(this.currentYear + 1, 11, 31);
-
-  @ViewChild(MatDatepicker)
-  picker!: MatDatepicker<Moment | undefined>;
-
 
   constructor(private store$: Store<IAppState>,
               public dialog: MatDialog) { }
@@ -50,6 +42,11 @@ export class ToDoCreateFormUI implements OnInit {
     this.taskStatus = event;
   }
 
+  getDeadline(event: Date): void
+  {
+    this.deadline = event;
+  }
+
   checkUserInput(): void
   {
     if(!this.taskStatus)
@@ -57,6 +54,7 @@ export class ToDoCreateFormUI implements OnInit {
       this.taskStatus = taskStatuses[0].status;
     }
 
+    // @ts-ignore
     let newTaskItem: ITaskItem  = {
       taskText: this.taskName.trim(),
       taskStatus: this.taskStatus,
@@ -97,10 +95,6 @@ export class ToDoCreateFormUI implements OnInit {
   {
     this.emitTask(newTaskItem);
     this.cleanForm();
-    if(this.deadline)
-    {
-      this.cleanDeadline()
-    }
   }
 
   openAlertDialog(alertText: string): void
@@ -122,10 +116,6 @@ export class ToDoCreateFormUI implements OnInit {
     this.taskName = '';
     this.taskStatus = '';
     this.taskDetails = '';
-  }
-
-  cleanDeadline()
-  {
-    this.picker.select(undefined);
+    this.deadline = undefined;
   }
 }

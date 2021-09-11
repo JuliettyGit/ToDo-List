@@ -8,26 +8,22 @@
   color: var(--header);
 }
 
-.taskNameInput {
+.center{
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.taskNameInput, .taskDetailsInput{
   width: 70%;
   line-height: 1.5em;
   height: 5em;
   margin-right: 1em;
 }
 
-.deadlineDate{
+app-date-picker{
   margin-right: 1em;
-  min-width: 150px;
-  width: 15%;
-  line-height: 1.5em;
-  height: 4.1em;
-}
-
-.center{
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
 }
 
 mat-selection-list{

@@ -23,6 +23,11 @@ export class EditModalDialogComponent implements OnInit
     this.data.taskStatus = event;
   }
 
+  getDeadline(event: Date)
+  {
+    this.data.deadline = event;
+  }
+
   close(): void
   {
     this.dialogRef.close();
@@ -35,7 +40,8 @@ export class EditModalDialogComponent implements OnInit
       this.dialogRef.close(
         { taskText: this.data.taskText,
           taskStatus: this.data.taskStatus,
-        taskDetails: this.data.taskDetails});
+        taskDetails: this.data.taskDetails,
+        deadline: this.data.deadline});
     }
 
     else
