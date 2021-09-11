@@ -1,0 +1,14 @@
+<mat-form-field class="deadlineDate"
+                appearance="fill">
+  <mat-label>Deadline</mat-label>
+  <input autocomplete="off"
+         matInput [min]="minDate"
+         [max]="maxDate"
+         [matDatepicker]="$any(picker)"
+         [ngModel]="deadline"
+  (ngModelChange)="setDeadline($event)">
+  <mat-datepicker-toggle matSuffix
+                         [for]="picker">
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
