@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ITaskItem } from "../../../shared/interfaces/ITaskItem";
 import { taskStatuses } from "../../../shared/constants/taskStatuses";
 import { AddNewTask } from "../../../store/actions/actions";
