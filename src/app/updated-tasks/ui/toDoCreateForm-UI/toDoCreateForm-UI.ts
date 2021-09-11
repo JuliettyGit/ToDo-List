@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ITaskItem } from "../../../shared/interfaces/ITaskItem";
 import { taskStatuses } from "../../../shared/constants/taskStatuses";
 import { AddNewTask } from "../../../store/actions/actions";
@@ -6,6 +6,8 @@ import { Store } from "@ngrx/store";
 import { IAppState } from "../../../shared/interfaces/IAppState";
 import { MatDialog } from "@angular/material/dialog";
 import { AlertModalDialogComponent } from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
+import { MatDatepicker } from '@angular/material/datepicker';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'toDoCreateForm-UI',
@@ -25,6 +27,9 @@ export class ToDoCreateFormUI implements OnInit {
   currentYear = new Date().getFullYear();
   minDate: Date = new Date(this.currentYear, 0, 1);
   maxDate: Date = new Date(this.currentYear + 1, 11, 31);
+
+  @ViewChild(MatDatepicker)
+  picker!: MatDatepicker<Moment | undefined>;
 
 
   constructor(private store$: Store<IAppState>,
@@ -90,6 +95,10 @@ export class ToDoCreateFormUI implements OnInit {
   {
     this.emitTask(newTaskItem);
     this.cleanForm();
+    if(this.deadline)
+    {
+      this.cleanDeadline()
+    }
   }
 
   openAlertDialog(alertText: string): void
@@ -110,6 +119,11 @@ export class ToDoCreateFormUI implements OnInit {
   {
     this.taskName = '';
     this.taskStatus = '';
-    this.taskDetails =''
+    this.taskDetails = '';
+  }
+
+  cleanDeadline()
+  {
+    this.picker.select(undefined);
   }
 }
