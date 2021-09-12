@@ -5,25 +5,21 @@
     flex-direction: column;
   }
 
-  .d-flex > mat-form-field {
-    margin-bottom: 0.7em;
-  }
-
   .d-flex > button {
     margin-top: 0.7em;
     width: 100%;
   }
 
-  .taskNameInput{
-    width: 100%;
-  }
-
+  .taskNameInput,
   .taskDetailsInput{
     width: 100%;
   }
 
-  /*TODO: 100%*/
-  .statusSelect, app-date-picker{
+  app-option-list, app-date-picker{
     width: 100%;
+  }
+
+  app-date-picker{
+    margin-top: 1.5em;
   }
 }

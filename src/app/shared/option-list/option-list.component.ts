@@ -9,11 +9,10 @@ import { taskStatuses } from '../constants/taskStatuses'
 
 export class OptionListComponent implements OnInit {
 
-  @Input() status: string = '';
+  @Input() status!: string;
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
   taskStatuses = taskStatuses;
-
 
   constructor() {}
 
@@ -23,4 +22,5 @@ export class OptionListComponent implements OnInit {
   {
     this.change.emit(event);
   }
+
 }

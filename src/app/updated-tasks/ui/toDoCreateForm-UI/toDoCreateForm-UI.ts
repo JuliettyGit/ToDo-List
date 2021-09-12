@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { ITaskItem } from "../../../shared/interfaces/ITaskItem";
 import { taskStatuses } from "../../../shared/constants/taskStatuses";
 import { AddNewTask } from "../../../store/actions/actions";
@@ -6,8 +6,6 @@ import { Store } from "@ngrx/store";
 import { IAppState } from "../../../shared/interfaces/IAppState";
 import { MatDialog } from "@angular/material/dialog";
 import { AlertModalDialogComponent } from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
-import { MatDatepicker } from '@angular/material/datepicker';
-import { Moment } from 'moment';
 
 @Component({
   selector: 'toDoCreateForm-UI',
@@ -54,7 +52,6 @@ export class ToDoCreateFormUI implements OnInit {
       this.taskStatus = taskStatuses[0].status;
     }
 
-    // @ts-ignore
     let newTaskItem: ITaskItem  = {
       taskText: this.taskName.trim(),
       taskStatus: this.taskStatus,
@@ -117,5 +114,6 @@ export class ToDoCreateFormUI implements OnInit {
     this.taskStatus = '';
     this.taskDetails = '';
     this.deadline = undefined;
+
   }
 }
