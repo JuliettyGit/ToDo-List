@@ -5,10 +5,10 @@ import { DeleteModalDialogComponent } from "../../../shared/modals/delete-modal-
 import { filter } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
 import { EditModalDialogComponent } from "../../../shared/modals/edit-modal-dialog/edit-modal-dialog.component";
-import {DeleteTask, DragNDrop, EditTask} from "../../../store/actions/actions";
+import { DeleteTask, DragNDrop, EditTask } from "../../../store/actions/actions";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../shared/interfaces/IAppState";
-import {AlertModalDialogComponent} from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
+import { AlertModalDialogComponent } from "../../../shared/modals/alert-modal-dialog/alert-modal-dialog.component";
 
 @Component({
   selector: 'appToDoList-UI',
@@ -68,7 +68,7 @@ export class ToDoListUI implements OnInit {
       .subscribe(result  => this.store$.dispatch(new EditTask([editingTask, result])))
   }
 
-  openAlertDialog(taskText: string,taskDetails: string, taskStatus: string, deadline: Date | undefined): void
+  openAlertDialog(taskText: string, taskDetails: string, taskStatus: string, deadline: Date | undefined): void
   {
     this.dialog.open(AlertModalDialogComponent, {
       data: {

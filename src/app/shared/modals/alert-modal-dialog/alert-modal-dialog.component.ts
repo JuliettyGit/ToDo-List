@@ -19,6 +19,7 @@ export class AlertModalDialogComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close();}
+    this.dialogRef.close();
+  }
 
 }

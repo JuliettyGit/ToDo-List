@@ -4,7 +4,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { OptionListComponent } from './option-list/option-list.component';
 import { DeleteButtonComponent } from "./buttons/delete-button/delete-button.component";
 import { EditButtonComponent } from "./buttons/edit-button/edit-button.component";
